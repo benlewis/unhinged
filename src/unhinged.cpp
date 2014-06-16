@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include "room.h"
 
 GLuint display_width, display_height;
 
@@ -37,82 +38,32 @@ float speed = 0.05f;
 
 // Input
 unsigned char keys[127] = {0};
-float mouse_x_location = 0.0f;
-float mouse_y_location = 0.0;
+float mouse_x_location = 0.0f, mouse_y_location = 0.0f;
+float mouse_extra_x = 0.0f, mouse_extra_speed = 0.02f;
 
-// Room stuff
-// TODO: Move to the room file
-float left_wall = -1.0f, right_wall = 1.0f;
-float room_ceiling = 1.0f, room_floor = -1.0f;
-float front_wall = 2.0f, back_wall = -2.0f;
-float clipping_plane = 0.15f;
+// The room
+room *game_room;
 
 void draw_room(void)
 {
-    glPushMatrix();
-    glBegin(GL_QUADS);
-    glShadeModel(GL_SMOOTH);
-    /* Floor */
-    glColor3f(1.0,1.0,1.0);
-    glVertex3f(left_wall,room_floor,front_wall);
-    glVertex3f(right_wall,room_floor,front_wall);
-    glVertex3f(right_wall,room_floor,back_wall);
-    glVertex3f(left_wall,room_floor,back_wall);
-    /* Ceiling */
-    glColor3f(0.55,0.55,0.55);
-    glVertex3f(left_wall,room_ceiling,back_wall);
-    glVertex3f(right_wall,room_ceiling,back_wall);
-    glVertex3f(right_wall,room_ceiling,front_wall);
-    glVertex3f(left_wall,room_ceiling,front_wall);
-    /* Walls */
-    glColor3f(0.35,0.35,0.35);
-    glVertex3f(left_wall,room_floor,front_wall);
-    glVertex3f(right_wall,room_floor,front_wall);
-    glVertex3f(right_wall,room_ceiling,front_wall);
-    glVertex3f(left_wall,room_ceiling,front_wall);
-    
-    glVertex3f(left_wall,room_floor,back_wall);
-    glVertex3f(right_wall,room_floor,back_wall);
-    glVertex3f(right_wall,room_ceiling,back_wall);
-    glVertex3f(left_wall,room_ceiling,back_wall);
-    
-    glColor3f(0.75,0.75,0.75);
-    glVertex3f(right_wall,room_ceiling,front_wall);
-    glVertex3f(right_wall,room_floor,front_wall);
-    glVertex3f(right_wall,room_floor,back_wall);
-    glVertex3f(right_wall,room_ceiling,back_wall);
-    
-    glVertex3f(left_wall,room_ceiling,front_wall);
-    glVertex3f(left_wall,room_floor,front_wall);
-    glVertex3f(left_wall,room_floor,back_wall);
-    glVertex3f(left_wall,room_ceiling,back_wall);
-    glEnd();
-	   
-    glPopMatrix();
-}
-
-void clip()
-{
-    if (x < left_wall + clipping_plane)
-        x = left_wall + clipping_plane;
-    if (x > right_wall - clipping_plane)
-        x = right_wall - clipping_plane;
-    if (z > front_wall - clipping_plane)
-        z = front_wall - clipping_plane;
-    if (z < back_wall + clipping_plane)
-        z = back_wall + clipping_plane;
+    game_room->draw();
 }
 
 void compute_angle()
 {
+    if (mouse_extra_x > 0)
+        mouse_extra_x += mouse_extra_speed;
+    else if (mouse_extra_x < 0)
+        mouse_extra_x -= mouse_extra_speed;
+    
     // update camera's direction
-    x_angle = sin(mouse_x_location);
-    z_angle = -cos(mouse_x_location);
+    x_angle = sin(mouse_x_location + mouse_extra_x);
+    z_angle = -cos(mouse_x_location + mouse_extra_x);
     y_angle = sin(-mouse_y_location);
     
-    lx = x_angle * (right_wall - left_wall);
-    lz = z_angle * (front_wall - back_wall);
-    ly = y_angle * (room_ceiling - room_floor);
+    lx = x_angle * (game_room->get_width());
+    lz = z_angle * (game_room->get_length());
+    ly = y_angle * (game_room->get_height());
 }
 
 void compute_pos()
@@ -132,7 +83,7 @@ void compute_pos()
 	x += delta_move * x_angle * speed - delta_side * z_angle * speed;;
 	z += delta_move * z_angle * speed + delta_side * x_angle * speed;
     
-    clip();
+    game_room->clip(x, z);
 }
 
 void reshape(int w, int h)
@@ -203,6 +154,14 @@ void pressKey(unsigned char key, int xx, int yy)
 
 void mouseMove(int x, int y)
 {
+    if (x > display_width - 5)
+        mouse_extra_x += mouse_extra_speed;
+    else if (x < 5)
+        mouse_extra_x -= mouse_extra_speed;
+    else
+        mouse_extra_x = 0.0f;
+    
+    
     float half_width = display_width / 2.0;
     float half_height = display_height / 2.0;
     mouse_x_location = (x - half_width) / half_width;
@@ -232,6 +191,8 @@ int main(int argc, char **argv)
     
     // Handle mouse events
     glutPassiveMotionFunc(mouseMove);
+    
+    game_room = new room();
     
     // enter GLUT event processing cycle
     glutMainLoop();

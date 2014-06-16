@@ -11,6 +11,7 @@
 		CEC8BB45194E0DDD007E7DF0 /* unhinged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB44194E0DDD007E7DF0 /* unhinged.cpp */; };
 		CEC8BB4C194E1024007E7DF0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */; };
 		CEC8BB4E194E1028007E7DF0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4D194E1028007E7DF0 /* GLUT.framework */; };
+		CEC8BB52194EB412007E7DF0 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB50194EB412007E7DF0 /* room.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		CEC8BB4A194E0FAC007E7DF0 /* gl_headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl_headers.h; sourceTree = "<group>"; };
 		CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		CEC8BB4D194E1028007E7DF0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/GLUT.framework; sourceTree = DEVELOPER_DIR; };
+		CEC8BB50194EB412007E7DF0 /* room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
+		CEC8BB51194EB412007E7DF0 /* room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = room.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,7 @@
 		CEC8BB43194E0D8E007E7DF0 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				CEC8BB4F194EB404007E7DF0 /* logic */,
 				CEC8BB49194E0F9A007E7DF0 /* gl */,
 				CEC8BB44194E0DDD007E7DF0 /* unhinged.cpp */,
 			);
@@ -100,6 +104,15 @@
 				CEC8BB4A194E0FAC007E7DF0 /* gl_headers.h */,
 			);
 			path = gl;
+			sourceTree = "<group>";
+		};
+		CEC8BB4F194EB404007E7DF0 /* logic */ = {
+			isa = PBXGroup;
+			children = (
+				CEC8BB50194EB412007E7DF0 /* room.cpp */,
+				CEC8BB51194EB412007E7DF0 /* room.h */,
+			);
+			path = logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC8BB52194EB412007E7DF0 /* room.cpp in Sources */,
 				CEC8BB45194E0DDD007E7DF0 /* unhinged.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
