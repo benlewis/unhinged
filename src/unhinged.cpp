@@ -15,6 +15,7 @@
 #include "room.h"
 
 GLuint display_width, display_height;
+float half_width, half_height;
 
 // The following variables are used to track movement and direction
 
@@ -39,7 +40,6 @@ float speed = 0.05f;
 // Input
 unsigned char keys[127] = {0};
 float mouse_x_location = 0.0f, mouse_y_location = 0.0f;
-float mouse_extra_x = 0.0f, mouse_extra_speed = 0.02f;
 
 // The room
 room *game_room;
@@ -51,19 +51,16 @@ void draw_room(void)
 
 void compute_angle()
 {
-    if (mouse_extra_x > 0)
-        mouse_extra_x += mouse_extra_speed;
-    else if (mouse_extra_x < 0)
-        mouse_extra_x -= mouse_extra_speed;
-    
     // update camera's direction
-    x_angle = sin(mouse_x_location + mouse_extra_x);
-    z_angle = -cos(mouse_x_location + mouse_extra_x);
-    y_angle = sin(-mouse_y_location);
+    x_angle = sin(mouse_x_location);
+    z_angle = -cos(3.14159f / 2.0f * mouse_x_location);
+    y_angle = sin(3.14159f / 2.0f *  -mouse_y_location);
     
-    lx = x_angle * (game_room->get_width());
-    lz = z_angle * (game_room->get_length());
+    lx = x_angle;
+    lz = z_angle;
     ly = y_angle * (game_room->get_height());
+    
+    //printf("ly: %.2f, lz: %.2f\n", ly, lz);
 }
 
 void compute_pos()
@@ -97,6 +94,8 @@ void reshape(int w, int h)
     
     display_height = h;
     display_width = w;
+    half_width = display_width / 2.0;
+    half_height = display_height / 2.0;
     
     // Use the Projection Matrix
 	glMatrixMode(GL_PROJECTION);
@@ -152,20 +151,49 @@ void pressKey(unsigned char key, int xx, int yy)
 	keys[tolower(key)] = 1;
 }
 
+float last_x = 0.0f, last_y = 0.0f;
+bool skip_next = false;
+
 void mouseMove(int x, int y)
 {
-    if (x > display_width - 5)
-        mouse_extra_x += mouse_extra_speed;
-    else if (x < 5)
-        mouse_extra_x -= mouse_extra_speed;
-    else
-        mouse_extra_x = 0.0f;
+//    if (skip_next == true)
+//    {
+//        skip_next = false;
+//        return;
+//    }
     
+    float new_x = (x - half_width) / half_width;
+    float new_y = (y - half_height) / half_height;
+    float x_inc = (new_x - last_x) * 1.5f;
+    float y_inc = (new_y - last_y) / 1.5f;
+    last_x = new_x;
+    last_y = new_y;
     
-    float half_width = display_width / 2.0;
-    float half_height = display_height / 2.0;
-    mouse_x_location = (x - half_width) / half_width;
-    mouse_y_location = (y - half_height) / half_height;
+    mouse_x_location += x_inc;
+    mouse_y_location += y_inc;
+    
+    if (mouse_y_location < -0.9f)
+        mouse_y_location = -0.9f;
+    if (mouse_y_location > 0.9f)
+        mouse_y_location = 0.9f;
+    if (mouse_x_location > 1.0f)
+        mouse_x_location -= 2.0f;
+    if (mouse_x_location < -1.0f)
+        mouse_x_location += 2.0f;
+    
+//    if (y > display_height - 5 || y < 5 || x > display_width - 5 || x < 5)
+//    {
+//        printf("xloc: %.2f lastx: %.2f\n", mouse_x_location, last_x);
+//        last_x = 0.0f;
+//        last_y = 0.0f;
+//        skip_next = true;
+//        glutWarpPointer((int)half_width, (int)half_height);
+//    }
+}
+
+void idle()
+{
+    display();
 }
 
 int main(int argc, char **argv)
@@ -182,7 +210,7 @@ int main(int argc, char **argv)
     // Setup our display callbacks
     glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	glutIdleFunc(display);
+	glutIdleFunc(idle);
     
     // Handle keyboard down/up
 	glutKeyboardFunc(pressKey);
@@ -190,6 +218,7 @@ int main(int argc, char **argv)
     glutIgnoreKeyRepeat(1);
     
     // Handle mouse events
+    //glutSetCursor(GLUT_CURSOR_NONE);
     glutPassiveMotionFunc(mouseMove);
     
     game_room = new room();
