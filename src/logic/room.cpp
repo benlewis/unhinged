@@ -12,8 +12,8 @@ room::room()
 {
     // Room stuff
     // TODO: Move to the room file
-    left_wall = -1.0f;
-    right_wall = 1.0f;
+    left_wall = -2.0f;
+    right_wall = 2.0f;
     room_ceiling = 1.0f;
     room_floor = -1.0f;
     front_wall = 2.0f;

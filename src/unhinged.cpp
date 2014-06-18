@@ -52,15 +52,14 @@ void draw_room(void)
 void compute_angle()
 {
     // update camera's direction
-    x_angle = sin(mouse_x_location);
+    x_angle = sin(3.14159f / 2.0f * mouse_x_location);
     z_angle = -cos(3.14159f / 2.0f * mouse_x_location);
     y_angle = sin(3.14159f / 2.0f *  -mouse_y_location);
     
+    // We can apply multipliers later if we want
     lx = x_angle;
     lz = z_angle;
-    ly = y_angle * (game_room->get_height());
-    
-    //printf("ly: %.2f, lz: %.2f\n", ly, lz);
+    ly = y_angle;
 }
 
 void compute_pos()
@@ -111,6 +110,9 @@ void reshape(int w, int h)
     
 	// Get Back to the Modelview
 	glMatrixMode(GL_MODELVIEW);
+    
+    // Move the mouse to the center
+    glutWarpPointer((int) half_width, (int) half_height);
 }
 
 void display(void)
@@ -172,14 +174,14 @@ void mouseMove(int x, int y)
     mouse_x_location += x_inc;
     mouse_y_location += y_inc;
     
-    if (mouse_y_location < -0.9f)
-        mouse_y_location = -0.9f;
-    if (mouse_y_location > 0.9f)
-        mouse_y_location = 0.9f;
-    if (mouse_x_location > 1.0f)
-        mouse_x_location -= 2.0f;
-    if (mouse_x_location < -1.0f)
-        mouse_x_location += 2.0f;
+    if (mouse_y_location < -0.3f)
+        mouse_y_location = -0.3f;
+    if (mouse_y_location > 0.6f)
+        mouse_y_location = 0.6f;
+//    if (mouse_x_location > 1.0f)
+//        mouse_x_location -= 2.0f;
+//    if (mouse_x_location < -1.0f)
+//        mouse_x_location += 2.0f;
     
 //    if (y > display_height - 5 || y < 5 || x > display_width - 5 || x < 5)
 //    {

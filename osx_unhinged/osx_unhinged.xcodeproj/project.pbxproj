@@ -12,6 +12,7 @@
 		CEC8BB4C194E1024007E7DF0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */; };
 		CEC8BB4E194E1028007E7DF0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4D194E1028007E7DF0 /* GLUT.framework */; };
 		CEC8BB52194EB412007E7DF0 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB50194EB412007E7DF0 /* room.cpp */; };
+		CEC8BB5519514943007E7DF0 /* piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB5319514943007E7DF0 /* piece.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,8 @@
 		CEC8BB4D194E1028007E7DF0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/GLUT.framework; sourceTree = DEVELOPER_DIR; };
 		CEC8BB50194EB412007E7DF0 /* room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
 		CEC8BB51194EB412007E7DF0 /* room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = room.h; sourceTree = "<group>"; };
+		CEC8BB5319514943007E7DF0 /* piece.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piece.cpp; sourceTree = "<group>"; };
+		CEC8BB5419514943007E7DF0 /* piece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piece.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 			children = (
 				CEC8BB50194EB412007E7DF0 /* room.cpp */,
 				CEC8BB51194EB412007E7DF0 /* room.h */,
+				CEC8BB5319514943007E7DF0 /* piece.cpp */,
+				CEC8BB5419514943007E7DF0 /* piece.h */,
 			);
 			path = logic;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			files = (
 				CEC8BB52194EB412007E7DF0 /* room.cpp in Sources */,
 				CEC8BB45194E0DDD007E7DF0 /* unhinged.cpp in Sources */,
+				CEC8BB5519514943007E7DF0 /* piece.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +258,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)../src/gl",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
 			};
@@ -265,6 +272,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)../src/gl",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
 			};
