@@ -22,5 +22,6 @@ void piece::update(int ticks)
 
 void piece::clip(float x_old, float y_old, float &x_new, float &y_new)
 {
-    
+    // Pieces don't clip by default
+    return;
 }
