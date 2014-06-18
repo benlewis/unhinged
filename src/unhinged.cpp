@@ -15,7 +15,7 @@
 #include "room.h"
 
 GLuint display_width, display_height;
-float half_width, half_height;
+float half_width = 100.0f, half_height = 100.0f;
 
 // The following variables are used to track movement and direction
 
@@ -30,9 +30,9 @@ float lx = 0.0f, lz = -1.0f, ly = head_height;
 float x = 0.0f, z = 1.0f;
 
 // What angle are we pointing
-float x_angle = sin(0);
-float z_angle = -cos(0);
-float y_angle = -sin(0);
+float x_angle = sin(0.0f);
+float z_angle = -cos(0.0f);
+float y_angle = -sin(0.0f);
 
 // Movement
 float speed = 0.05f;
@@ -40,6 +40,11 @@ float speed = 0.05f;
 // Input
 unsigned char keys[127] = {0};
 float mouse_x_location = 0.0f, mouse_y_location = 0.0f;
+float last_x = 0.0f, last_y = 0.0f;
+
+// Skip the next mouse update
+bool skip_next = false;
+bool first_reshape = true;
 
 // The room
 room *game_room;
@@ -89,13 +94,17 @@ void reshape(int w, int h)
 	if (h == 0)
 		h = 1;
     
-	float ratio =  w * 1.0 / h;
+	float ratio =  w * 1.0f / h;
     
     display_height = h;
     display_width = w;
-    half_width = display_width / 2.0;
-    half_height = display_height / 2.0;
-    
+    half_width = display_width / 2.0f;
+    half_height = display_height / 2.0f;
+	mouse_x_location = 0.0f;
+	mouse_y_location = 0.0f;
+	last_x = 0.0f;
+	last_y = 0.0f;
+
     // Use the Projection Matrix
 	glMatrixMode(GL_PROJECTION);
     
@@ -110,9 +119,11 @@ void reshape(int w, int h)
     
 	// Get Back to the Modelview
 	glMatrixMode(GL_MODELVIEW);
-    
-    // Move the mouse to the center
-    glutWarpPointer((int) half_width, (int) half_height);
+
+	if (first_reshape == true) {
+		first_reshape = false;
+		glutWarpPointer((int)half_width, (int)half_height);
+	}
 }
 
 void display(void)
@@ -128,6 +139,8 @@ void display(void)
     compute_pos();
 
 	// Set the camera
+	//printf("x: %.2f, head_height: %.2f, z: %.2f, lx: %.2f, ly: %.2f, lz: %.2f\n", x, head_height, z, lx, ly, lz);
+
 	gluLookAt(
               x,      head_height,   z,
               x+lx,   ly,   z+lz,
@@ -153,8 +166,10 @@ void pressKey(unsigned char key, int xx, int yy)
 	keys[tolower(key)] = 1;
 }
 
-float last_x = 0.0f, last_y = 0.0f;
-bool skip_next = false;
+void mouseFunc(int button, int state, int x, int y)
+{
+
+}
 
 void mouseMove(int x, int y)
 {
@@ -164,17 +179,24 @@ void mouseMove(int x, int y)
 //        return;
 //    }
     
+	// On windows this was getting called before reshape set the h,w
+	// This caused a very weird bug
+	if (half_height < 1.0f)
+		half_height = 1.0f;
+	if (half_width < 1.0f)
+		half_width = 1.0f;
+
     float new_x = (x - half_width) / half_width;
     float new_y = (y - half_height) / half_height;
     float x_inc = (new_x - last_x) * 1.5f;
     float y_inc = (new_y - last_y) / 1.5f;
-    last_x = new_x;
+	last_x = new_x;
     last_y = new_y;
     
     mouse_x_location += x_inc;
     mouse_y_location += y_inc;
-    
-    if (mouse_y_location < -0.3f)
+
+	if (mouse_y_location < -0.3f)
         mouse_y_location = -0.3f;
     if (mouse_y_location > 0.6f)
         mouse_y_location = 0.6f;
@@ -192,7 +214,7 @@ void mouseMove(int x, int y)
 //        glutWarpPointer((int)half_width, (int)half_height);
 //    }
 }
-
+ 
 void idle()
 {
     display();
@@ -203,7 +225,7 @@ int main(int argc, char **argv)
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(100,100);
+    glutInitWindowPosition(800,100);
     glutInitWindowSize(640,640);
     glutCreateWindow("Unhinged");
     glutFullScreen();
@@ -222,9 +244,10 @@ int main(int argc, char **argv)
     // Handle mouse events
     //glutSetCursor(GLUT_CURSOR_NONE);
     glutPassiveMotionFunc(mouseMove);
+	glutMouseFunc(mouseFunc);
     
     game_room = new room();
-    
+
     // enter GLUT event processing cycle
     glutMainLoop();
     

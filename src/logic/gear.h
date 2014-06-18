@@ -14,10 +14,26 @@
 #include "gl_headers.h"
 #include "math.h"
 
+enum direction {
+	SPIN_CLOCKWISE,
+	SPIN_COUNTERCLOCKWISE,
+	SPIN_NONE
+};
+
 class gear : public piece
 {
 public:
-    void list(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
-              GLint teeth, GLfloat tooth_depth);
+	gear(int x, int y, int z, room *gr, direction _spin_direction, float _angle) : 
+		piece(x, y, z, gr), spin_direction(_spin_direction), angle(_angle)  { 
+		create_list(); 
+	}
+	void update(int ticks);
+	void draw();
+
+private:
+    void create_list();
+	float angle = 0.0f;
+	direction spin_direction;
+
 };
 #endif /* defined(__osx_unhinged__gear__) */

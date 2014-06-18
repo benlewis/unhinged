@@ -41,19 +41,24 @@
 #define __osx_unhinged__piece__
 
 #include "gl_headers.h"
+#include "room.h"
+
+class room;
 
 class piece
 {
 public:
-    void draw();
-    void update(int ticks);
+	piece(int x, int y, int z, room *gr);
+    virtual void draw();
+    virtual void update(int ticks);
     void clip(float x_old, float y_old, float &x_new, float &y_new);
     
-private:
+protected:
     int x, y, z; // the game block location of the pice
     float draw_x, draw_y, draw_z; // where we start drawing in screen space
     GLint list; // for speedy drawing with glCallList
-    
+	virtual void create_list() {}
+
 };
 
 #endif /* defined(__osx_unhinged__piece__) */

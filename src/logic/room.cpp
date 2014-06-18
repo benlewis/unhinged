@@ -7,6 +7,7 @@
 //
 
 #include "room.h"
+#include "gear.h"
 
 room::room()
 {
@@ -19,6 +20,10 @@ room::room()
     front_wall = 2.0f;
     back_wall = -2.0f;
     clipping_plane = 0.15f;
+
+	pieces.push_back(new gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
+	pieces.push_back(new gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -9.0f));
+	pieces.push_back(new gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
 }
 
 void room::draw()
@@ -27,19 +32,19 @@ void room::draw()
     glBegin(GL_QUADS);
     glShadeModel(GL_SMOOTH);
     /* Floor */
-    glColor3f(1.0,1.0,1.0);
+    glColor3f(1.0f,1.0f,1.0f);
     glVertex3f(left_wall,room_floor,front_wall);
     glVertex3f(right_wall,room_floor,front_wall);
     glVertex3f(right_wall,room_floor,back_wall);
     glVertex3f(left_wall,room_floor,back_wall);
     /* Ceiling */
-    glColor3f(0.55,0.55,0.55);
+    glColor3f(0.55f,0.55f,0.55f);
     glVertex3f(left_wall,room_ceiling,back_wall);
     glVertex3f(right_wall,room_ceiling,back_wall);
     glVertex3f(right_wall,room_ceiling,front_wall);
     glVertex3f(left_wall,room_ceiling,front_wall);
     /* Walls */
-    glColor3f(0.35,0.35,0.35);
+    glColor3f(0.35f,0.35f,0.35f);
     glVertex3f(left_wall,room_floor,front_wall);
     glVertex3f(right_wall,room_floor,front_wall);
     glVertex3f(right_wall,room_ceiling,front_wall);
@@ -50,7 +55,7 @@ void room::draw()
     glVertex3f(right_wall,room_ceiling,back_wall);
     glVertex3f(left_wall,room_ceiling,back_wall);
     
-    glColor3f(0.75,0.75,0.75);
+    glColor3f(0.75f,0.75f,0.75f);
     glVertex3f(right_wall,room_ceiling,front_wall);
     glVertex3f(right_wall,room_floor,front_wall);
     glVertex3f(right_wall,room_floor,back_wall);
@@ -63,6 +68,15 @@ void room::draw()
     glEnd();
     
     glPopMatrix();
+
+	vector<piece*>::iterator it;
+	for (it = pieces.begin(); it != pieces.end(); ++it) {
+		piece *piece = *it;
+		glColor3f(0.75f, 0.1f, 0.0f);
+		piece->update(0);
+		piece->draw();
+	}
+
 }
 
 float room::get_width()
@@ -78,6 +92,21 @@ float room::get_length()
 float room::get_height()
 {
     return room_ceiling - room_floor;
+}
+
+float room::get_board_width()
+{
+	return board_width;
+}
+
+float room::get_board_length()
+{
+	return board_length;
+}
+
+float room::get_board_height()
+{
+	return board_height;
 }
 
 void room::clip(float &x, float &z)
