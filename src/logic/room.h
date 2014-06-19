@@ -31,6 +31,9 @@ private:
 	float board_height = 10.0;
 
 	vector<piece*> pieces;
+    
+    // Textures
+    GLuint tex;
 
 public:
     room();

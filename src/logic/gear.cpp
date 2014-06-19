@@ -31,14 +31,15 @@ void gear::create_list()
 
 	list = glGenLists(1);
 	glNewList(list, GL_COMPILE);
-	GLfloat color[3] = { 0.8f, 0.1f, 0.0f};
+	GLfloat color[3] = { 0.8f, 0.1f, 0.5f};
+    glColor3f(0.5f, 0.1f, 0.0f);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 
 	GLfloat inner_radius = 0.04f;
-	GLfloat outer_radius = 0.095f;
+	GLfloat outer_radius = 0.099f;
 	GLfloat width = 0.05f;
 	GLint teeth = 10;
-	GLfloat tooth_depth = 0.05f;
+	GLfloat tooth_depth = 0.03f;
     
 	GLint i;
     GLfloat r0, r1, r2;
@@ -51,7 +52,7 @@ void gear::create_list()
     
     da = 2.0f * M_PI / teeth / 4.0f;
     
-    glShadeModel(GL_FLAT);
+    glShadeModel(GL_SMOOTH);
     
     glNormal3f(0.0f, 0.0f, 1.0f);
     

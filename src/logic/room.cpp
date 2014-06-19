@@ -8,6 +8,7 @@
 
 #include "room.h"
 #include "gear.h"
+#include "SOIL.h"
 
 room::room()
 {
@@ -20,23 +21,46 @@ room::room()
     front_wall = 2.0f;
     back_wall = -2.0f;
     clipping_plane = 0.15f;
-
+    
+    // Create a texture for the floor
+    glGenTextures(1, &tex);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    int width, height;
+    string file = ASSET_PATH + "textures/marble.jpg";
+    unsigned char* image = SOIL_load_image(file.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+                 GL_UNSIGNED_BYTE, image);
+    SOIL_free_image_data(image);
+    
+    
 	pieces.push_back(new gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
-	pieces.push_back(new gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -9.0f));
+	pieces.push_back(new gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f));
 	pieces.push_back(new gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
 }
 
 void room::draw()
 {
     glPushMatrix();
+    glEnable(GL_TEXTURE_2D);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glBindTexture(GL_TEXTURE_2D, tex);
     glBegin(GL_QUADS);
     glShadeModel(GL_SMOOTH);
     /* Floor */
     glColor3f(1.0f,1.0f,1.0f);
+    glTexCoord2f(0.0f, 0.0f);
     glVertex3f(left_wall,room_floor,front_wall);
+    glTexCoord2f(1.0f, 0.0f);
     glVertex3f(right_wall,room_floor,front_wall);
+    glTexCoord2f(1.0f, 1.0f);
     glVertex3f(right_wall,room_floor,back_wall);
+    glTexCoord2f(0.0f, 1.0f);
     glVertex3f(left_wall,room_floor,back_wall);
+    
+    
     /* Ceiling */
     glColor3f(0.55f,0.55f,0.55f);
     glVertex3f(left_wall,room_ceiling,back_wall);
@@ -66,6 +90,8 @@ void room::draw()
     glVertex3f(left_wall,room_floor,back_wall);
     glVertex3f(left_wall,room_ceiling,back_wall);
     glEnd();
+    
+    glDisable(GL_TEXTURE_2D);
     
     glPopMatrix();
 
