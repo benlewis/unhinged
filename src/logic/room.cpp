@@ -59,7 +59,7 @@ void room::draw()
     glVertex3f(right_wall,room_floor,back_wall);
     glTexCoord2f(0.0f, 1.0f);
     glVertex3f(left_wall,room_floor,back_wall);
-    
+
     
     /* Ceiling */
     glColor3f(0.55f,0.55f,0.55f);

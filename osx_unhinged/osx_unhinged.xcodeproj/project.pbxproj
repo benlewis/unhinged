@@ -265,12 +265,12 @@
 					"ASSET_PATH=string(\\\"${PROJECT_DIR}/../assets/\\\")",
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../plugins/SOIL",
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)../src/gl",
-					/opt/local/include/SOIL,
+					"$(PROJECT_DIR)/../src/gl",
 				);
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-lSOIL";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -282,12 +282,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../plugins/SOIL",
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)../src/gl",
-					/opt/local/include/SOIL,
+					"$(PROJECT_DIR)/../src/gl",
 				);
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-lSOIL";
 				PRODUCT_NAME = "$(TARGET_NAME)";
