@@ -29,10 +29,12 @@ room::room()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glGenerateMipmap(GL_TEXTURE_2D);
     int width, height;
-    string file = ASSET_PATH + "textures/marble.jpg";
+    string file = ASSET_PATH + "textures/wall.jpg";
     unsigned char* image = SOIL_load_image(file.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
                  GL_UNSIGNED_BYTE, image);
+    gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,
+                      GL_RGB, GL_UNSIGNED_BYTE, image );
     SOIL_free_image_data(image);
     
     
@@ -44,13 +46,12 @@ room::room()
 void room::draw()
 {
     glPushMatrix();
+
+    /* Floor */
     glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glBindTexture(GL_TEXTURE_2D, tex);
     glBegin(GL_QUADS);
-    glShadeModel(GL_SMOOTH);
-    /* Floor */
-    glColor3f(1.0f,1.0f,1.0f);
     glTexCoord2f(0.0f, 0.0f);
     glVertex3f(left_wall,room_floor,front_wall);
     glTexCoord2f(1.0f, 0.0f);
@@ -59,8 +60,12 @@ void room::draw()
     glVertex3f(right_wall,room_floor,back_wall);
     glTexCoord2f(0.0f, 1.0f);
     glVertex3f(left_wall,room_floor,back_wall);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
 
-    
+    glBegin(GL_QUADS);
+    glShadeModel(GL_SMOOTH);
+
     /* Ceiling */
     glColor3f(0.55f,0.55f,0.55f);
     glVertex3f(left_wall,room_ceiling,back_wall);
@@ -91,8 +96,6 @@ void room::draw()
     glVertex3f(left_wall,room_ceiling,back_wall);
     glEnd();
     
-    glDisable(GL_TEXTURE_2D);
-    
     glPopMatrix();
 
 	vector<piece*>::iterator it;
@@ -103,6 +106,7 @@ void room::draw()
 		piece->draw();
 	}
 
+    
 }
 
 float room::get_width()
