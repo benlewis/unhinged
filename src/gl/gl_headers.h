@@ -12,6 +12,8 @@
 #ifdef __APPLE__
 #include "OpenGL/gl.h"
 #include "GLUT/glut.h"
+#include <ApplicationServices/ApplicationServices.h>
+
 #elif defined _WIN32 || defined _WIN64
 #include <GL/glew.h>
 #define FREEGLUT_STATIC

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE53FF861953F820001C5354 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE53FF851953F820001C5354 /* ApplicationServices.framework */; };
 		CEC8BB3D194E0D09007E7DF0 /* osx_unhinged.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */; };
 		CEC8BB45194E0DDD007E7DF0 /* unhinged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB44194E0DDD007E7DF0 /* unhinged.cpp */; };
 		CEC8BB4C194E1024007E7DF0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */; };
@@ -30,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE53FF851953F820001C5354 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = DEVELOPER_DIR; };
 		CEC8BB37194E0D09007E7DF0 /* osx_unhinged */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = osx_unhinged; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = osx_unhinged.1; sourceTree = "<group>"; };
 		CEC8BB44194E0DDD007E7DF0 /* unhinged.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unhinged.cpp; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE53FF861953F820001C5354 /* ApplicationServices.framework in Frameworks */,
 				CEC8BB4E194E1028007E7DF0 /* GLUT.framework in Frameworks */,
 				CEC8BB4C194E1024007E7DF0 /* OpenGL.framework in Frameworks */,
 			);
@@ -60,6 +63,7 @@
 		CEC8BB2E194E0D09007E7DF0 = {
 			isa = PBXGroup;
 			children = (
+				CE53FF851953F820001C5354 /* ApplicationServices.framework */,
 				CEC8BB4D194E1028007E7DF0 /* GLUT.framework */,
 				CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */,
 				CEC8BB46194E0DEF007E7DF0 /* assets */,

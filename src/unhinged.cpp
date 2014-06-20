@@ -40,11 +40,7 @@ float speed = 0.05f;
 // Input
 unsigned char keys[127] = {0};
 float mouse_x_location = 0.0f, mouse_y_location = 0.0f;
-float last_x = 0.0f, last_y = 0.0f;
-
-// Skip the next mouse update
-bool skip_next = false;
-bool first_reshape = true;
+bool after_reshape = true;
 
 // The room
 room *game_room;
@@ -100,10 +96,6 @@ void reshape(int w, int h)
     display_width = w;
     half_width = display_width / 2.0f;
     half_height = display_height / 2.0f;
-	mouse_x_location = 0.0f;
-	mouse_y_location = 0.0f;
-	last_x = 0.0f;
-	last_y = 0.0f;
 
     // Use the Projection Matrix
 	glMatrixMode(GL_PROJECTION);
@@ -119,11 +111,8 @@ void reshape(int w, int h)
     
 	// Get Back to the Modelview
 	glMatrixMode(GL_MODELVIEW);
-
-	if (first_reshape == true) {
-		first_reshape = false;
-		glutWarpPointer((int)half_width, (int)half_height);
-	}
+    
+    after_reshape = true;
 }
 
 void display(void)
@@ -171,48 +160,50 @@ void mouseFunc(int button, int state, int x, int y)
 
 }
 
+void move_cursor_to_center()
+{
+    // Warp back to center. But use non-glut methods on Apple
+    // Glut has a .25 delay on Apple when you warp. This causes a stutter
+    // This fix is recommended at
+    // http://stackoverflow.com/questions/10196603/using-cgeventsourcesetlocaleventssuppressioninterval-instead-of-the-deprecated/17547015#17547015
+#if __APPLE__
+    CGPoint warpPoint = CGPointMake(half_width, half_height);
+    CGWarpMouseCursorPosition(warpPoint);
+    CGAssociateMouseAndMouseCursorPosition(true);
+#else
+    glutWarpPointer(half_width, half_height);
+#endif
+}
+
 void mouseMove(int x, int y)
 {
-//    if (skip_next == true)
-//    {
-//        skip_next = false;
-//        return;
-//    }
-    
 	// On windows this was getting called before reshape set the h,w
 	// This caused a very weird bug
 	if (half_height < 1.0f)
 		half_height = 1.0f;
 	if (half_width < 1.0f)
 		half_width = 1.0f;
-
-    float new_x = (x - half_width) / half_width;
-    float new_y = (y - half_height) / half_height;
-    float x_inc = (new_x - last_x) * 1.5f;
-    float y_inc = (new_y - last_y) / 1.5f;
-	last_x = new_x;
-    last_y = new_y;
     
-    mouse_x_location += x_inc;
-    mouse_y_location += y_inc;
+    if (after_reshape) {
+        // Don't just move, since we didn't start off at center
+        after_reshape = false;
+        move_cursor_to_center();
+        return;
+    }
 
+    mouse_x_location += (x - half_width) / half_width;
+    mouse_y_location += (y - half_height) / half_height;
+    
 	if (mouse_y_location < -0.3f)
         mouse_y_location = -0.3f;
     if (mouse_y_location > 0.6f)
         mouse_y_location = 0.6f;
-//    if (mouse_x_location > 1.0f)
-//        mouse_x_location -= 2.0f;
-//    if (mouse_x_location < -1.0f)
-//        mouse_x_location += 2.0f;
+    if (mouse_x_location > 2.0f)
+        mouse_x_location -= 4.0f;
+    if (mouse_x_location < -2.0f)
+        mouse_x_location += 4.0f;
     
-//    if (y > display_height - 5 || y < 5 || x > display_width - 5 || x < 5)
-//    {
-//        printf("xloc: %.2f lastx: %.2f\n", mouse_x_location, last_x);
-//        last_x = 0.0f;
-//        last_y = 0.0f;
-//        skip_next = true;
-//        glutWarpPointer((int)half_width, (int)half_height);
-//    }
+    move_cursor_to_center();
 }
  
 void idle()
@@ -229,6 +220,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(640,640);
     glutCreateWindow("Unhinged");
     glutFullScreen();
+    
     glEnable(GL_DEPTH_TEST);
     
     // Setup our display callbacks
@@ -242,7 +234,7 @@ int main(int argc, char **argv)
     glutIgnoreKeyRepeat(1);
     
     // Handle mouse events
-    //glutSetCursor(GLUT_CURSOR_NONE);
+    glutSetCursor(GLUT_CURSOR_NONE);
     glutPassiveMotionFunc(mouseMove);
 	glutMouseFunc(mouseFunc);
     
