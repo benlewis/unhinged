@@ -41,6 +41,7 @@ float speed = 0.05f;
 unsigned char keys[127] = {0};
 float mouse_x_location = 0.0f, mouse_y_location = 0.0f;
 bool after_reshape = true;
+bool skip_mouse = false;
 
 // The room
 room *game_room;
@@ -162,6 +163,7 @@ void mouseFunc(int button, int state, int x, int y)
 
 void move_cursor_to_center()
 {
+	skip_mouse = true;
     // Warp back to center. But use non-glut methods on Apple
     // Glut has a .25 delay on Apple when you warp. This causes a stutter
     // This fix is recommended at
@@ -171,12 +173,16 @@ void move_cursor_to_center()
     CGWarpMouseCursorPosition(warpPoint);
     CGAssociateMouseAndMouseCursorPosition(true);
 #else
-    glutWarpPointer(half_width, half_height);
+    glutWarpPointer((int)half_width, (int)half_height);
 #endif
 }
 
 void mouseMove(int x, int y)
 {
+	if (skip_mouse == true) {
+		skip_mouse = false;
+		return;
+	}
 	// On windows this was getting called before reshape set the h,w
 	// This caused a very weird bug
 	if (half_height < 1.0f)
@@ -194,6 +200,7 @@ void mouseMove(int x, int y)
     mouse_x_location += (x - half_width) / half_width;
     mouse_y_location += (y - half_height) / half_height;
     
+
 	if (mouse_y_location < -0.3f)
         mouse_y_location = -0.3f;
     if (mouse_y_location > 0.6f)

@@ -8,7 +8,9 @@
 
 #include "room.h"
 #include "gear.h"
-#include "SOIL.h"
+#include "SOIL/SOIL.h"
+
+#define ASSET_PATH string("D:/Dev/unhinged/assets/")
 
 room::room()
 {
@@ -27,12 +29,13 @@ room::room()
     glBindTexture(GL_TEXTURE_2D, tex);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glGenerateMipmap(GL_TEXTURE_2D);
+
     int width, height;
     string file = ASSET_PATH + "textures/wall.jpg";
     unsigned char* image = SOIL_load_image(file.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
                  GL_UNSIGNED_BYTE, image);
+	//glGenerateMipmap(GL_TEXTURE_2D);
     gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,
                       GL_RGB, GL_UNSIGNED_BYTE, image );
     SOIL_free_image_data(image);

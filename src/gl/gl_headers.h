@@ -18,9 +18,10 @@
 #include <GL/glew.h>
 #define FREEGLUT_STATIC
 #include <GL/freeglut.h>
+#define M_PI 3.1415926f
 #endif
 
 
-//#define M_PI 3.1415926f
+
 
 #endif
