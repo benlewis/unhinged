@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="SOIL">
+      <UniqueIdentifier>{9bf9e3d6-be2a-4129-86cd-db6f7470c3d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\unhinged.cpp">
@@ -27,6 +30,18 @@
     <ClCompile Include="..\..\src\logic\room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\plugins\SOIL\image_DXT.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\plugins\SOIL\image_helper.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\plugins\SOIL\SOIL.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\plugins\SOIL\stb_image_aug.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\logic\gear.h">
@@ -40,6 +55,24 @@
     </ClInclude>
     <ClInclude Include="..\..\src\gl\gl_headers.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugins\SOIL\image_DXT.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugins\SOIL\image_helper.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugins\SOIL\stb_image_aug.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugins\SOIL\stbi_DDS_aug.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugins\SOIL\stbi_DDS_aug_c.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\plugins\SOIL\SOIL.h">
+      <Filter>SOIL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
