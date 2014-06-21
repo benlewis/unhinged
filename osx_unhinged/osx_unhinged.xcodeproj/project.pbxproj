@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		CE53FF861953F820001C5354 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE53FF851953F820001C5354 /* ApplicationServices.framework */; };
+		CE53FFA919556574001C5354 /* image_DXT.c in Sources */ = {isa = PBXBuildFile; fileRef = CE53FFA519556574001C5354 /* image_DXT.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		CE53FFAA19556574001C5354 /* image_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = CE53FFA619556574001C5354 /* image_helper.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		CE53FFAB19556574001C5354 /* SOIL.c in Sources */ = {isa = PBXBuildFile; fileRef = CE53FFA719556574001C5354 /* SOIL.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		CE53FFAC19556574001C5354 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = CE53FFA819556574001C5354 /* stb_image_aug.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		CEC8BB3D194E0D09007E7DF0 /* osx_unhinged.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */; };
 		CEC8BB45194E0DDD007E7DF0 /* unhinged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB44194E0DDD007E7DF0 /* unhinged.cpp */; };
 		CEC8BB4C194E1024007E7DF0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */; };
 		CEC8BB4E194E1028007E7DF0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4D194E1028007E7DF0 /* GLUT.framework */; };
 		CEC8BB52194EB412007E7DF0 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB50194EB412007E7DF0 /* room.cpp */; };
-		CEC8BB5519514943007E7DF0 /* piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB5319514943007E7DF0 /* piece.cpp */; };
+		CEC8BB5519514943007E7DF0 /* piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB5319514943007E7DF0 /* piece.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		CEC8BB58195154EA007E7DF0 /* gear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEC8BB56195154EA007E7DF0 /* gear.cpp */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +36,16 @@
 
 /* Begin PBXFileReference section */
 		CE53FF851953F820001C5354 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = DEVELOPER_DIR; };
+		CE53FF9F19556486001C5354 /* image_DXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
+		CE53FFA019556486001C5354 /* image_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
+		CE53FFA119556486001C5354 /* SOIL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOIL.h; sourceTree = "<group>"; };
+		CE53FFA219556486001C5354 /* stb_image_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_aug.h; sourceTree = "<group>"; };
+		CE53FFA319556486001C5354 /* stbi_DDS_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug.h; sourceTree = "<group>"; };
+		CE53FFA419556486001C5354 /* stbi_DDS_aug_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug_c.h; sourceTree = "<group>"; };
+		CE53FFA519556574001C5354 /* image_DXT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image_DXT.c; sourceTree = "<group>"; };
+		CE53FFA619556574001C5354 /* image_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image_helper.c; sourceTree = "<group>"; };
+		CE53FFA719556574001C5354 /* SOIL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SOIL.c; sourceTree = "<group>"; };
+		CE53FFA819556574001C5354 /* stb_image_aug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image_aug.c; sourceTree = "<group>"; };
 		CEC8BB37194E0D09007E7DF0 /* osx_unhinged */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = osx_unhinged; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = osx_unhinged.1; sourceTree = "<group>"; };
 		CEC8BB44194E0DDD007E7DF0 /* unhinged.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unhinged.cpp; sourceTree = "<group>"; };
@@ -60,9 +74,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE53FF9D19556486001C5354 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				CE53FF9E19556486001C5354 /* SOIL */,
+			);
+			name = plugins;
+			path = ../plugins;
+			sourceTree = "<group>";
+		};
+		CE53FF9E19556486001C5354 /* SOIL */ = {
+			isa = PBXGroup;
+			children = (
+				CE53FFA519556574001C5354 /* image_DXT.c */,
+				CE53FFA619556574001C5354 /* image_helper.c */,
+				CE53FFA719556574001C5354 /* SOIL.c */,
+				CE53FFA819556574001C5354 /* stb_image_aug.c */,
+				CE53FF9F19556486001C5354 /* image_DXT.h */,
+				CE53FFA019556486001C5354 /* image_helper.h */,
+				CE53FFA119556486001C5354 /* SOIL.h */,
+				CE53FFA219556486001C5354 /* stb_image_aug.h */,
+				CE53FFA319556486001C5354 /* stbi_DDS_aug.h */,
+				CE53FFA419556486001C5354 /* stbi_DDS_aug_c.h */,
+			);
+			path = SOIL;
+			sourceTree = "<group>";
+		};
 		CEC8BB2E194E0D09007E7DF0 = {
 			isa = PBXGroup;
 			children = (
+				CE53FF9D19556486001C5354 /* plugins */,
 				CE53FF851953F820001C5354 /* ApplicationServices.framework */,
 				CEC8BB4D194E1028007E7DF0 /* GLUT.framework */,
 				CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */,
@@ -183,7 +224,11 @@
 				CEC8BB58195154EA007E7DF0 /* gear.cpp in Sources */,
 				CEC8BB52194EB412007E7DF0 /* room.cpp in Sources */,
 				CEC8BB45194E0DDD007E7DF0 /* unhinged.cpp in Sources */,
+				CE53FFAA19556574001C5354 /* image_helper.c in Sources */,
+				CE53FFAB19556574001C5354 /* SOIL.c in Sources */,
 				CEC8BB5519514943007E7DF0 /* piece.cpp in Sources */,
+				CE53FFA919556574001C5354 /* image_DXT.c in Sources */,
+				CE53FFAC19556574001C5354 /* stb_image_aug.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +321,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_LDFLAGS = "-lSOIL";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
 			};
@@ -293,7 +338,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_LDFLAGS = "-lSOIL";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
 			};
