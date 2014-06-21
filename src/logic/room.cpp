@@ -10,8 +10,6 @@
 #include "gear.h"
 #include "SOIL/SOIL.h"
 
-#define ASSET_PATH string("D:/Dev/unhinged/assets/")
-
 room::room()
 {
     // Room stuff
