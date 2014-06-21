@@ -104,9 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				CE53FF9D19556486001C5354 /* plugins */,
-				CE53FF851953F820001C5354 /* ApplicationServices.framework */,
-				CEC8BB4D194E1028007E7DF0 /* GLUT.framework */,
-				CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */,
 				CEC8BB46194E0DEF007E7DF0 /* assets */,
 				CEC8BB43194E0D8E007E7DF0 /* src */,
 				CEC8BB39194E0D09007E7DF0 /* osx_unhinged */,
@@ -125,6 +122,9 @@
 		CEC8BB39194E0D09007E7DF0 /* osx_unhinged */ = {
 			isa = PBXGroup;
 			children = (
+				CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */,
+				CEC8BB4D194E1028007E7DF0 /* GLUT.framework */,
+				CE53FF851953F820001C5354 /* ApplicationServices.framework */,
 				CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */,
 			);
 			path = osx_unhinged;
