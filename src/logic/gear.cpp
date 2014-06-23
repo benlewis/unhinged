@@ -8,7 +8,7 @@
 
 #include "gear.h"
 
-void gear::update(int ticks)
+void Gear::update(int ticks)
 {
 	switch (this->spin_direction) {
 	case SPIN_CLOCKWISE:		angle += 1.0f; break;
@@ -17,7 +17,7 @@ void gear::update(int ticks)
 	}
 }
 
-void gear::draw()
+void Gear::draw()
 {
 	glPushMatrix();
 	glTranslatef(draw_x, draw_y, draw_z);
@@ -26,7 +26,7 @@ void gear::draw()
 	glPopMatrix();
 }
 
-void gear::create_list()
+void Gear::create_list()
 {
 
 	list = glGenLists(1);

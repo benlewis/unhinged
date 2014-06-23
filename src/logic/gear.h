@@ -20,11 +20,11 @@ enum direction {
 	SPIN_NONE
 };
 
-class gear : public piece
+class Gear : public Piece
 {
 public:
-	gear(int x, int y, int z, room *gr, direction _spin_direction, float _angle) : 
-		piece(x, y, z, gr), spin_direction(_spin_direction), angle(_angle)  { 
+	Gear(int x, int y, int z, Room *gr, direction _spin_direction, float _angle) :
+		Piece(x, y, z, gr), spin_direction(_spin_direction), angle(_angle)  {
 		create_list(); 
 	}
 	void update(int ticks);

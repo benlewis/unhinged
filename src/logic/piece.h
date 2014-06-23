@@ -43,12 +43,12 @@
 #include "gl_headers.h"
 #include "room.h"
 
-class room;
+class Room;
 
-class piece
+class Piece
 {
 public:
-	piece(int x, int y, int z, room *gr);
+	Piece(int x, int y, int z, Room *gr);
     virtual void draw();
     virtual void update(int ticks);
     void clip(float x_old, float y_old, float &x_new, float &y_new);

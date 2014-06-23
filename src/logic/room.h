@@ -17,9 +17,9 @@
 
 using namespace std;
 
-class piece;
+class Piece;
 
-class room
+class Room
 {
 private:
     float left_wall = -1.0f, right_wall = 1.0f;
@@ -30,13 +30,13 @@ private:
 	float board_length = 10.0;
 	float board_height = 10.0;
 
-	vector<piece*> pieces;
+	vector<Piece*> pieces;
     
     // Textures
     GLuint tex;
 
 public:
-    room();
+    Room();
     void clip(float &x, float &z);
     float get_width();
     float get_length();

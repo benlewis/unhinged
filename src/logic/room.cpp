@@ -10,7 +10,7 @@
 #include "gear.h"
 #include "SOIL/SOIL.h"
 
-room::room()
+Room::Room()
 {
     // Room stuff
     // TODO: Move to the room file
@@ -39,12 +39,12 @@ room::room()
     SOIL_free_image_data(image);
     
     
-	pieces.push_back(new gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
-	pieces.push_back(new gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f));
-	pieces.push_back(new gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
+	pieces.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
+	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f));
+	pieces.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
 }
 
-void room::draw()
+void Room::draw()
 {
     glPushMatrix();
 
@@ -99,9 +99,9 @@ void room::draw()
     
     glPopMatrix();
 
-	vector<piece*>::iterator it;
+	vector<Piece*>::iterator it;
 	for (it = pieces.begin(); it != pieces.end(); ++it) {
-		piece *piece = *it;
+		Piece *piece = *it;
 		glColor3f(0.75f, 0.1f, 0.0f);
 		piece->update(0);
 		piece->draw();
@@ -110,37 +110,37 @@ void room::draw()
     
 }
 
-float room::get_width()
+float Room::get_width()
 {
     return right_wall - left_wall;
 }
 
-float room::get_length()
+float Room::get_length()
 {
     return front_wall - back_wall;
 }
 
-float room::get_height()
+float Room::get_height()
 {
     return room_ceiling - room_floor;
 }
 
-float room::get_board_width()
+float Room::get_board_width()
 {
 	return board_width;
 }
 
-float room::get_board_length()
+float Room::get_board_length()
 {
 	return board_length;
 }
 
-float room::get_board_height()
+float Room::get_board_height()
 {
 	return board_height;
 }
 
-void room::clip(float &x, float &z)
+void Room::clip(float &x, float &z)
 {
     if (x < left_wall + clipping_plane)
         x = left_wall + clipping_plane;

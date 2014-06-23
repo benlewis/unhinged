@@ -44,11 +44,11 @@ bool after_reshape = true;
 bool skip_mouse = false;
 
 // The room
-room *game_room;
+Room *room;
 
 void draw_room(void)
 {
-    game_room->draw();
+    room->draw();
 }
 
 void compute_angle()
@@ -81,7 +81,7 @@ void compute_pos()
 	x += delta_move * x_angle * speed - delta_side * z_angle * speed;;
 	z += delta_move * z_angle * speed + delta_side * x_angle * speed;
     
-    game_room->clip(x, z);
+    room->clip(x, z);
 }
 
 void reshape(int w, int h)
@@ -163,7 +163,6 @@ void mouseFunc(int button, int state, int x, int y)
 
 void move_cursor_to_center()
 {
-	skip_mouse = true;
     // Warp back to center. But use non-glut methods on Apple
     // Glut has a .25 delay on Apple when you warp. This causes a stutter
     // This fix is recommended at
@@ -173,6 +172,7 @@ void move_cursor_to_center()
     CGWarpMouseCursorPosition(warpPoint);
     CGAssociateMouseAndMouseCursorPosition(true);
 #else
+    skip_mouse = true;
     glutWarpPointer((int)half_width, (int)half_height);
 #endif
 }
@@ -245,7 +245,7 @@ int main(int argc, char **argv)
     glutPassiveMotionFunc(mouseMove);
 	glutMouseFunc(mouseFunc);
     
-    game_room = new room();
+    room = new Room();
 
     // enter GLUT event processing cycle
     glutMainLoop();

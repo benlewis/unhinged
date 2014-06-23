@@ -10,7 +10,7 @@
 
 #include "piece.h"
 
-piece::piece(int x, int y, int z, room *gr)
+Piece::Piece(int x, int y, int z, Room *gr)
 {
 	this->x = x;
 	this->y = y;
@@ -22,7 +22,7 @@ piece::piece(int x, int y, int z, room *gr)
 
 }
 
-void piece::draw()
+void Piece::draw()
 {
 	glPushMatrix();
 	glTranslatef(draw_x, draw_y, draw_z);
@@ -30,12 +30,12 @@ void piece::draw()
 	glPopMatrix();
 }
 
-void piece::update(int ticks)
+void Piece::update(int ticks)
 {
 	printf("base update\n");
 }
 
-void piece::clip(float x_old, float y_old, float &x_new, float &y_new)
+void Piece::clip(float x_old, float y_old, float &x_new, float &y_new)
 {
     // Pieces don't clip by default
     return;
