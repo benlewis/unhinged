@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "room.h"
+#include "texture_manager.h"
 
 GLuint display_width, display_height;
 float half_width = 100.0f, half_height = 100.0f;
@@ -220,36 +221,43 @@ void idle()
 
 int main(int argc, char **argv)
 {
-    // init GLUT and create window
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(800,100);
-    glutInitWindowSize(640,640);
-    glutCreateWindow("Unhinged");
-    glutFullScreen();
-    
-    glEnable(GL_DEPTH_TEST);
-    
-    // Setup our display callbacks
-    glutDisplayFunc(display);
-	glutReshapeFunc(reshape);
-	glutIdleFunc(idle);
-    
-    // Handle keyboard down/up
-	glutKeyboardFunc(pressKey);
-	glutKeyboardUpFunc(releaseKey);
-    glutIgnoreKeyRepeat(1);
-    
-    // Handle mouse events
-    glutSetCursor(GLUT_CURSOR_NONE);
-    glutPassiveMotionFunc(mouseMove);
-	glutMouseFunc(mouseFunc);
-    
-    room = new Room();
+  // init GLUT and create window
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+  glutInitWindowPosition(800,100);
+  glutInitWindowSize(640,640);
+  glutCreateWindow("Unhinged");
+  glutFullScreen();
+  
+  TextureManager::Instance()->LoadTextures({
+    "marble.jpg",
+    "rust.jpg",
+    "darkwood.jpg",
+    "wall.jpg"
+  });
 
-    // enter GLUT event processing cycle
-    glutMainLoop();
-    
-    return 0;
+  glEnable(GL_DEPTH_TEST);
+
+  // Setup our display callbacks
+  glutDisplayFunc(display);
+  glutReshapeFunc(reshape);
+  glutIdleFunc(idle);
+
+  // Handle keyboard down/up
+  glutKeyboardFunc(pressKey);
+  glutKeyboardUpFunc(releaseKey);
+  glutIgnoreKeyRepeat(1);
+
+  // Handle mouse events
+  glutSetCursor(GLUT_CURSOR_NONE);
+  glutPassiveMotionFunc(mouseMove);
+  glutMouseFunc(mouseFunc);
+
+  room = new Room();
+
+  // enter GLUT event processing cycle
+  glutMainLoop();
+
+  return 0;
 }
 
