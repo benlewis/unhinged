@@ -25,7 +25,7 @@ float head_height = 0.0f;
 
 
 // Vector representing the camera's direction
-float lx = 0.0f, lz = -1.0f, ly = head_height;
+float lx = 0.0f, lz = -1.0f, ly = 0.0f;
 
 // XZ position of the camera
 float x = 0.0f, z = 1.0f;
