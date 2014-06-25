@@ -40,8 +40,7 @@
 #ifndef __osx_unhinged__piece__
 #define __osx_unhinged__piece__
 
-#include "gl_headers.h"
-#include "room.h"
+#include "render/gl_headers.h"
 
 class Room;
 

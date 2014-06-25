@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
-#include "gear.h"
-#include "texture_manager.h"
+#include "game_logic/gear.h"
+
+#include "render/gl_headers.h"
+#include "render/texture_manager.h"
+
+#include "math.h"
 
 void Gear::update(int ticks)
 {

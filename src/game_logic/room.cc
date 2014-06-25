@@ -6,12 +6,7 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
-#include "room.h"
-#include "gear.h"
-#include "texture_manager.h"
-#include "SOIL/SOIL.h"
-
-#include <algorithm>
+#include "game_logic/room.h"
 
 Room::Room()
 {
@@ -31,22 +26,22 @@ Room::Room()
 
 void Room::draw()
 {
-  GLfloat ambientLight[] = {0.2f, 0.2f, 0.2f, 1.0f};
-  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
-  
-  GLfloat lightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
-  GLfloat lightPos[] = {0.0f, 0.0f, -2.0f, 1.0f};
-  GLfloat backPos[] = {0.0f, 0.0f, 2.0f, 1.0f};
-  GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
-
-  glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor);
-  glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
-  glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
-
-  glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor);
-  glLightfv(GL_LIGHT2, GL_SPECULAR, lightColor);
-  glLightfv(GL_LIGHT2, GL_POSITION, backPos);
-  glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, backDir);
+//  GLfloat ambientLight[] = {0.2f, 0.2f, 0.2f, 1.0f};
+//  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+//  
+//  GLfloat lightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
+//  GLfloat lightPos[] = {0.0f, 0.0f, -2.0f, 1.0f};
+//  GLfloat backPos[] = {0.0f, 0.0f, 2.0f, 1.0f};
+//  GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
+//
+//  glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor);
+//  glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
+//  glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
+//
+//  glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor);
+//  glLightfv(GL_LIGHT2, GL_SPECULAR, lightColor);
+//  glLightfv(GL_LIGHT2, GL_POSITION, backPos);
+//  glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, backDir);
   
   glPushMatrix();
   glShadeModel(GL_SMOOTH);

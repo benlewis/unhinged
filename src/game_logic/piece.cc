@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
+#include "game_logic/piece.h"
+#include "game_logic/room.h"
 
-
-#include "piece.h"
 
 Piece::Piece(int x, int y, int z, Room *gr)
 {

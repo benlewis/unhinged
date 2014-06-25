@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
-#include "texture_manager.h"
-#include "gl_headers.h"
-#include "SOIL/SOIL.h"
+#include "render/texture_manager.h"
 
 TextureManager* TextureManager::instance_(0);
 

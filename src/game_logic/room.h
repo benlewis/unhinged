@@ -9,11 +9,18 @@
 #ifndef __osx_unhinged__room__
 #define __osx_unhinged__room__
 
-#include "gl_headers.h"
-#include "piece.h"
-
 #include <stdlib.h>
 #include <vector>
+#include <algorithm>
+
+#include "render/gl_headers.h"
+#include "render/texture_manager.h"
+
+#include "third_party/SOIL/SOIL.h"
+
+#include "game_logic/piece.h"
+#include "game_logic/gear.h"
+
 
 using namespace std;
 

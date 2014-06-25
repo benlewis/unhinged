@@ -6,14 +6,16 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
-#include "gl_headers.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "room.h"
-#include "texture_manager.h"
+
+#include "render/gl_headers.h"
+#include "render/texture_manager.h"
+
+#include "game_logic/room.h"
 
 GLuint display_width, display_height;
 float half_width = 100.0f, half_height = 100.0f;

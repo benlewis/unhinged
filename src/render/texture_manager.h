@@ -9,11 +9,14 @@
 #ifndef __osx_unhinged__texture_manager__
 #define __osx_unhinged__texture_manager__
 
-#include "gl_headers.h"
 #include <stdlib.h>
 #include <string>
 #include <vector>
 #include <map>
+
+#include "render/gl_headers.h"
+#include "third_party/SOIL/SOIL.h"
+
 
 using namespace std;
 
