@@ -229,14 +229,20 @@ int main(int argc, char **argv)
   glutCreateWindow("Unhinged");
   glutFullScreen();
   
+  glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_NORMALIZE);
+	glShadeModel(GL_SMOOTH);
+	//Disable color materials, so that glMaterial calls work
+	glDisable(GL_COLOR_MATERIAL);
+  
   TextureManager::Instance()->LoadTextures({
     "marble.jpg",
     "rust.jpg",
     "darkwood.jpg",
     "wall.jpg"
   });
-
-  glEnable(GL_DEPTH_TEST);
 
   // Setup our display callbacks
   glutDisplayFunc(display);

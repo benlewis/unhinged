@@ -31,6 +31,23 @@ Room::Room()
 
 void Room::draw()
 {
+  GLfloat ambientLight[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+  
+  GLfloat lightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
+  GLfloat lightPos[] = {0.0f, 0.0f, 2.0f, 1.0f};
+  GLfloat backPos[] = {0.0f, 0.0f, -1.5f, 1.0f};
+  GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
+
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor);
+  glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+
+  glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor);
+  glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
+  glLightfv(GL_LIGHT1, GL_POSITION, backPos);
+  glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, backDir);
+  
   glPushMatrix();
   glShadeModel(GL_SMOOTH);
 

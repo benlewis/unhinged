@@ -21,16 +21,9 @@ void Gear::update(int ticks)
 void Gear::draw()
 {
 	glPushMatrix();
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("marble.jpg");
 	glTranslatef(draw_x, draw_y, draw_z);
 	glRotatef(this->angle, 0.0f, 0.0f, 1.0f);
-
-  GLshort genericTexCoords[] = { 0, 1, 1, 1, 0, 0, 1, 0 };
-  glTexCoordPointer(2, GL_SHORT, 0, genericTexCoords);
-
 	glCallList(list);
-  glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 
@@ -38,13 +31,21 @@ void Gear::create_list()
 {
 	list = glGenLists(1);
 	glNewList(list, GL_COMPILE);
-	GLfloat color[3] = { 0.8f, 0.1f, 0.5f};
-  glColor3f(0.5f, 0.1f, 0.0f);
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
+  
+  // Setup Bronze
+  float mat_ambient[4] = { 0.329412f, 0.223529f, 0.027451f,1.0f };
+  float mat_diffuse[4] = { 0.780392f, 0.568627f, 0.113725f, 1.0f };
+  float mat_specular[4] = { 0.992157f, 0.941176f, 0.807843f, 1.0f };
+  float shine = 27.8974f;
+
+  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, mat_ambient);
+  glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, mat_diffuse);
+  glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, mat_specular);
+  glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS, shine);
 
 	GLfloat inner_radius = 0.04f;
 	GLfloat outer_radius = 0.099f;
-	GLfloat width = 0.05f;
+	GLfloat width = 0.02f;
 	GLint teeth = 10;
 	GLfloat tooth_depth = 0.03f;
     
@@ -62,6 +63,7 @@ void Gear::create_list()
   glShadeModel(GL_SMOOTH);
   
   glNormal3f(0.0f, 0.0f, 1.0f);
+
   
   /* draw front face */
   glBegin(GL_QUAD_STRIP);
@@ -156,6 +158,6 @@ void Gear::create_list()
       glVertex3f(r0 * cos(angle), r0 * sin(angle), width * 0.5f);
   }
   glEnd();
-    
+  
 	glEndList();
 }
