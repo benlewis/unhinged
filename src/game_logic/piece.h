@@ -49,7 +49,7 @@ public:
 	Piece(int x, int y, int z, Room *gr);
   virtual void draw();
   virtual void update(int ticks);
-  void clip(float x_old, float y_old, float &x_new, float &y_new);
+  void clip(GLfloat x_old, GLfloat y_old, GLfloat &x_new, GLfloat &y_new);
     
 protected:
   int x_, y_, z_; // the game block location of the pice

@@ -27,7 +27,7 @@ void Piece::update(int ticks) {
 	printf("base update\n");
 }
 
-void Piece::clip(float x_old, float y_old, float &x_new, float &y_new) {
+void Piece::clip(GLfloat x_old, GLfloat y_old, GLfloat &x_new, GLfloat &y_new) {
     // Pieces don't clip by default
     return;
 }

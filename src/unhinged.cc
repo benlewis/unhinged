@@ -72,7 +72,7 @@ void compute_pos() {
   if (keys['s'] == 1)
       delta_move -= 1.0;
 
-  float delta_side = 0.0f;
+  GLfloat delta_side = 0.0f;
   if (keys['d']  == 1)
       delta_side += 1.0;
   if (keys['a'] == 1)
