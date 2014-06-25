@@ -44,18 +44,17 @@
 
 class Room;
 
-class Piece
-{
+class Piece {
 public:
 	Piece(int x, int y, int z, Room *gr);
-    virtual void draw();
-    virtual void update(int ticks);
-    void clip(float x_old, float y_old, float &x_new, float &y_new);
+  virtual void draw();
+  virtual void update(int ticks);
+  void clip(float x_old, float y_old, float &x_new, float &y_new);
     
 protected:
-    int x, y, z; // the game block location of the pice
-    float draw_x, draw_y, draw_z; // where we start drawing in screen space
-    GLint list; // for speedy drawing with glCallList
+  int x_, y_, z_; // the game block location of the pice
+  GLfloat draw_x_, draw_y_, draw_z_; // where we start drawing in screen space
+  GLint list_; // for speedy drawing with glCallList
 	virtual void create_list() {}
 
 };

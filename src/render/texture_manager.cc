@@ -10,34 +10,29 @@
 
 TextureManager* TextureManager::instance_(0);
 
-TextureManager* TextureManager::Instance()
-{
+TextureManager* TextureManager::Instance() {
 	if(!instance_)
 		instance_ = new TextureManager();
     
 	return instance_;
 }
 
-TextureManager::TextureManager()
-{
+TextureManager::TextureManager() {
 
 }
 
 
-TextureManager::~TextureManager()
-{
+TextureManager::~TextureManager() {
 	instance_ = 0;
 }
 
-void TextureManager::LoadTextures(vector<string> filenames)
-{
+void TextureManager::LoadTextures(vector<string> filenames) {
   for (vector<string>::iterator i = filenames.begin(); i != filenames.end(); ++i) {
     LoadTexture(*i);
   }
 }
 
-void TextureManager::LoadTexture(string filename)
-{
+void TextureManager::LoadTexture(string filename) {
   // OpenGL will use assignment to set this
   GLuint texture_id = -1;
 
@@ -61,8 +56,7 @@ void TextureManager::LoadTexture(string filename)
 }
 
 
-void TextureManager::BindTexture(string filename)
-{
+void TextureManager::BindTexture(string filename) {
   assert(textures_.find(filename) != textures_.end());
   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
   glBindTexture(GL_TEXTURE_2D, textures_[filename]);

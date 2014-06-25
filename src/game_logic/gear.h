@@ -19,8 +19,8 @@ enum Direction {
 
 class Gear : public Piece {
 public:
-	Gear(int x, int y, int z, Room *gr, Direction _spin_direction, float _angle) :
-		Piece(x, y, z, gr), spin_direction(_spin_direction), angle(_angle)  {
+	Gear(int x, int y, int z, Room *room, Direction spin_direction, GLfloat angle) :
+		Piece(x, y, z, room), spin_direction_(spin_direction), angle_(angle)  {
 		create_list(); 
 	}
 	void update(int ticks);
@@ -28,8 +28,8 @@ public:
 
 private:
   void create_list();
-	float angle = 0.0f;
-	Direction spin_direction;
+	GLfloat angle_ = 0.0f;
+	Direction spin_direction_;
 
 };
 

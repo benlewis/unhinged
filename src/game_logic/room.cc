@@ -8,40 +8,37 @@
 
 #include "game_logic/room.h"
 
-Room::Room()
-{
-    // Establish parameters, probably should be in a configuration manager
-    left_wall = -2.0f;
-    right_wall = 2.0f;
-    room_ceiling = 1.0f;
-    room_floor = -1.0f;
-    front_wall = 2.0f;
-    back_wall = -2.0f;
-    clipping_plane = 0.15f;
+Room::Room() {
+  // Establish parameters, probably should be in a configuration manager
+  left_wall = -2.0f;
+  right_wall = 2.0f;
+  room_ceiling = 1.0f;
+  room_floor = -1.0f;
+  front_wall = 2.0f;
+  back_wall = -2.0f;
     
 	pieces.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
 	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f));
 	pieces.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
 }
 
-void Room::draw()
-{
-//  GLfloat ambientLight[] = {0.2f, 0.2f, 0.2f, 1.0f};
-//  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
-//  
-//  GLfloat lightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
-//  GLfloat lightPos[] = {0.0f, 0.0f, -2.0f, 1.0f};
-//  GLfloat backPos[] = {0.0f, 0.0f, 2.0f, 1.0f};
-//  GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
-//
-//  glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor);
-//  glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
-//  glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
-//
-//  glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor);
-//  glLightfv(GL_LIGHT2, GL_SPECULAR, lightColor);
-//  glLightfv(GL_LIGHT2, GL_POSITION, backPos);
-//  glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, backDir);
+void Room::draw() {
+  GLfloat ambientLight[] = {0.2f, 0.2f, 0.2f, 1.0f};
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+  
+  GLfloat lightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
+  GLfloat lightPos[] = {0.0f, 0.0f, -2.0f, 1.0f};
+  GLfloat backPos[] = {0.0f, 0.0f, 2.0f, 1.0f};
+  GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
+
+  glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor);
+  glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
+  glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
+
+  glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor);
+  glLightfv(GL_LIGHT2, GL_SPECULAR, lightColor);
+  glLightfv(GL_LIGHT2, GL_POSITION, backPos);
+  glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, backDir);
   
   glPushMatrix();
   glShadeModel(GL_SMOOTH);
@@ -69,8 +66,8 @@ void Room::draw()
 
 void Room::draw_face(vector<float> x, vector<float> y, vector<float> z)
 {
-  float tex_x = 0.0f;
-  float tex_y = 0.0f;
+  GLfloat tex_x = 0.0f;
+  GLfloat tex_y = 0.0f;
   int step = 0;
   
   glEnable(GL_TEXTURE_2D);
@@ -95,38 +92,31 @@ void Room::draw_face(vector<float> x, vector<float> y, vector<float> z)
   glDisable(GL_TEXTURE_2D);
 }
 
-float Room::get_width()
-{
+GLfloat Room::get_width() {
     return right_wall - left_wall;
 }
 
-float Room::get_length()
-{
+GLfloat Room::get_length() {
     return front_wall - back_wall;
 }
 
-float Room::get_height()
-{
+GLfloat Room::get_height() {
     return room_ceiling - room_floor;
 }
 
-float Room::get_board_width()
-{
+GLfloat Room::get_board_width() {
 	return board_width;
 }
 
-float Room::get_board_length()
-{
+GLfloat Room::get_board_length() {
 	return board_length;
 }
 
-float Room::get_board_height()
-{
+GLfloat Room::get_board_height() {
 	return board_height;
 }
 
-void Room::clip(float &x, float &z)
-{
+void Room::clip(GLfloat &x, GLfloat &z) {
     if (x < left_wall + clipping_plane)
         x = left_wall + clipping_plane;
     if (x > right_wall - clipping_plane)

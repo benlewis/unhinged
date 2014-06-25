@@ -26,16 +26,16 @@ using namespace std;
 
 class Piece;
 
-class Room
-{
+class Room {
 private:
-  float left_wall = -1.0f, right_wall = 1.0f;
-  float room_ceiling = 1.0f, room_floor = -1.0f;
-  float front_wall = 2.0f, back_wall = -2.0f;
-  float clipping_plane = 0.15f;
-	float board_width = 20.0;
-	float board_length = 10.0;
-	float board_height = 10.0;
+  GLfloat left_wall, right_wall;
+  GLfloat room_ceiling, room_floor;
+  GLfloat front_wall, back_wall;
+  
+  GLfloat clipping_plane = 0.15f;
+	GLfloat board_width = 20.0f;
+	GLfloat board_length = 10.0f;
+	GLfloat board_height = 10.0f;
 
 	vector<Piece*> pieces;
   
@@ -44,12 +44,12 @@ private:
 public:
   Room();
   void clip(float &x, float &z);
-  float get_width();
-  float get_length();
-  float get_height();
-	float get_board_width();
-	float get_board_length();
-	float get_board_height();
+  GLfloat get_width();
+  GLfloat get_length();
+  GLfloat get_height();
+	GLfloat get_board_width();
+	GLfloat get_board_length();
+	GLfloat get_board_height();
 
   void draw();
 

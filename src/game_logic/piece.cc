@@ -10,33 +10,24 @@
 #include "game_logic/room.h"
 
 
-Piece::Piece(int x, int y, int z, Room *gr)
-{
-	this->x = x;
-	this->y = y;
-	this->z = z;
-
-	this->draw_x = (float)x / gr->get_board_width() * gr->get_width() - gr->get_width() / 2.0f;
-	this->draw_y = (float)y / gr->get_board_height() * gr->get_height() - gr->get_height() / 2.0f;
-	this->draw_z = (float)z / gr->get_board_length() * gr->get_length() - gr->get_length() / 2.0f;
-
+Piece::Piece(int x, int y, int z, Room *room): x_(x), y_(y), z_(z) {
+	this->draw_x_ = (GLfloat)x / room->get_board_width() * room->get_width() - room->get_width() / 2.0f;
+	this->draw_y_ = (GLfloat)y / room->get_board_height() * room->get_height() - room->get_height() / 2.0f;
+	this->draw_z_ = (GLfloat)z / room->get_board_length() * room->get_length() - room->get_length() / 2.0f;
 }
 
-void Piece::draw()
-{
+void Piece::draw() {
 	glPushMatrix();
-	glTranslatef(draw_x, draw_y, draw_z);
-	glCallList(list);
+	glTranslatef(draw_x_, draw_y_, draw_z_);
+	glCallList(list_);
 	glPopMatrix();
 }
 
-void Piece::update(int ticks)
-{
+void Piece::update(int ticks) {
 	printf("base update\n");
 }
 
-void Piece::clip(float x_old, float y_old, float &x_new, float &y_new)
-{
+void Piece::clip(float x_old, float y_old, float &x_new, float &y_new) {
     // Pieces don't clip by default
     return;
 }
