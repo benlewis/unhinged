@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)..\..\src\gl;$(ProjectDir)..\..\src\logic;$(ProjectDir)..\..\third_party;$(ProjectDir)..\..\plugins;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -75,26 +75,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\plugins\SOIL\image_DXT.c" />
-    <ClCompile Include="..\..\plugins\SOIL\image_helper.c" />
-    <ClCompile Include="..\..\plugins\SOIL\SOIL.c" />
-    <ClCompile Include="..\..\plugins\SOIL\stb_image_aug.c" />
-    <ClCompile Include="..\..\src\logic\gear.cpp" />
-    <ClCompile Include="..\..\src\logic\piece.cpp" />
-    <ClCompile Include="..\..\src\logic\room.cpp" />
-    <ClCompile Include="..\..\src\unhinged.cpp" />
+    <ClCompile Include="..\..\src\game_logic\gear.cc" />
+    <ClCompile Include="..\..\src\game_logic\piece.cc" />
+    <ClCompile Include="..\..\src\game_logic\room.cc" />
+    <ClCompile Include="..\..\src\render\texture_manager.cc" />
+    <ClCompile Include="..\..\src\third_party\SOIL\image_DXT.c">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\src\third_party\SOIL\image_helper.c">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\src\third_party\SOIL\SOIL.c">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\src\third_party\SOIL\stb_image_aug.c">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\src\unhinged.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\plugins\SOIL\image_DXT.h" />
-    <ClInclude Include="..\..\plugins\SOIL\image_helper.h" />
-    <ClInclude Include="..\..\plugins\SOIL\SOIL.h" />
-    <ClInclude Include="..\..\plugins\SOIL\stbi_DDS_aug.h" />
-    <ClInclude Include="..\..\plugins\SOIL\stbi_DDS_aug_c.h" />
-    <ClInclude Include="..\..\plugins\SOIL\stb_image_aug.h" />
-    <ClInclude Include="..\..\src\gl\gl_headers.h" />
-    <ClInclude Include="..\..\src\logic\gear.h" />
-    <ClInclude Include="..\..\src\logic\piece.h" />
-    <ClInclude Include="..\..\src\logic\room.h" />
+    <ClInclude Include="..\..\src\game_logic\gear.h" />
+    <ClInclude Include="..\..\src\game_logic\piece.h" />
+    <ClInclude Include="..\..\src\game_logic\room.h" />
+    <ClInclude Include="..\..\src\render\gl_headers.h" />
+    <ClInclude Include="..\..\src\render\texture_manager.h" />
+    <ClInclude Include="..\..\src\third_party\scoped_ptr\scoped_ptr.h" />
+    <ClInclude Include="..\..\src\third_party\SOIL\image_DXT.h" />
+    <ClInclude Include="..\..\src\third_party\SOIL\image_helper.h" />
+    <ClInclude Include="..\..\src\third_party\SOIL\SOIL.h" />
+    <ClInclude Include="..\..\src\third_party\SOIL\stbi_DDS_aug.h" />
+    <ClInclude Include="..\..\src\third_party\SOIL\stbi_DDS_aug_c.h" />
+    <ClInclude Include="..\..\src\third_party\SOIL\stb_image_aug.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

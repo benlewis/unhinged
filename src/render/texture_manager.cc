@@ -8,6 +8,10 @@
 
 #include "render/texture_manager.h"
 
+#if defined _WIN32 || defined _WIN64
+#include <assert.h>
+#endif
+
 TextureManager* TextureManager::instance_(0);
 
 TextureManager* TextureManager::Instance() {

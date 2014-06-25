@@ -13,66 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="SOIL">
-      <UniqueIdentifier>{9bf9e3d6-be2a-4129-86cd-db6f7470c3d7}</UniqueIdentifier>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{53a5495a-96fe-48e3-97e3-f431d69fc43a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\SOIL">
+      <UniqueIdentifier>{e0e6ec05-18be-409d-84bc-70c98a38a34f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\scoped_ptr">
+      <UniqueIdentifier>{3d33c7fe-d06d-434c-852d-91eb44b2f5ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{cd91a2e3-5732-4fdf-af3e-e2d7a078c721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_logic">
+      <UniqueIdentifier>{38906434-34cf-4cf1-864a-6485b16d4e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{5bc7127a-91f7-4352-b501-ba94980003ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\unhinged.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\third_party\SOIL\stb_image_aug.c">
+      <Filter>third_party\SOIL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\logic\gear.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\third_party\SOIL\SOIL.c">
+      <Filter>third_party\SOIL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\logic\piece.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\third_party\SOIL\image_DXT.c">
+      <Filter>third_party\SOIL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\logic\room.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\third_party\SOIL\image_helper.c">
+      <Filter>third_party\SOIL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\plugins\SOIL\image_DXT.c">
-      <Filter>SOIL</Filter>
+    <ClCompile Include="..\..\src\render\texture_manager.cc">
+      <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\plugins\SOIL\image_helper.c">
-      <Filter>SOIL</Filter>
+    <ClCompile Include="..\..\src\game_logic\room.cc">
+      <Filter>game_logic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\plugins\SOIL\SOIL.c">
-      <Filter>SOIL</Filter>
+    <ClCompile Include="..\..\src\game_logic\gear.cc">
+      <Filter>game_logic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\plugins\SOIL\stb_image_aug.c">
-      <Filter>SOIL</Filter>
+    <ClCompile Include="..\..\src\game_logic\piece.cc">
+      <Filter>game_logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\unhinged.cc">
+      <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\logic\gear.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\src\third_party\SOIL\image_DXT.h">
+      <Filter>third_party\SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\logic\piece.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\src\third_party\SOIL\image_helper.h">
+      <Filter>third_party\SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\logic\room.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\src\third_party\SOIL\SOIL.h">
+      <Filter>third_party\SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\gl\gl_headers.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\src\third_party\SOIL\stb_image_aug.h">
+      <Filter>third_party\SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugins\SOIL\image_DXT.h">
-      <Filter>SOIL</Filter>
+    <ClInclude Include="..\..\src\third_party\SOIL\stbi_DDS_aug.h">
+      <Filter>third_party\SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugins\SOIL\image_helper.h">
-      <Filter>SOIL</Filter>
+    <ClInclude Include="..\..\src\third_party\SOIL\stbi_DDS_aug_c.h">
+      <Filter>third_party\SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugins\SOIL\stb_image_aug.h">
-      <Filter>SOIL</Filter>
+    <ClInclude Include="..\..\src\third_party\scoped_ptr\scoped_ptr.h">
+      <Filter>third_party\scoped_ptr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugins\SOIL\stbi_DDS_aug.h">
-      <Filter>SOIL</Filter>
+    <ClInclude Include="..\..\src\render\gl_headers.h">
+      <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugins\SOIL\stbi_DDS_aug_c.h">
-      <Filter>SOIL</Filter>
+    <ClInclude Include="..\..\src\render\texture_manager.h">
+      <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\plugins\SOIL\SOIL.h">
-      <Filter>SOIL</Filter>
+    <ClInclude Include="..\..\src\game_logic\gear.h">
+      <Filter>game_logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game_logic\piece.h">
+      <Filter>game_logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game_logic\room.h">
+      <Filter>game_logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
