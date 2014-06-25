@@ -11,6 +11,8 @@
 #include "texture_manager.h"
 #include "SOIL/SOIL.h"
 
+#include <algorithm>
+
 Room::Room()
 {
     // Establish parameters, probably should be in a configuration manager
@@ -32,70 +34,14 @@ void Room::draw()
   glPushMatrix();
   glShadeModel(GL_SMOOTH);
 
-  /* Floor */
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("darkwood.jpg");
-  glBegin(GL_QUADS);
-  glTexCoord2f(0.0f, 0.0f); glVertex3f(left_wall,room_floor,front_wall);
-  glTexCoord2f(3.0f, 0.0f); glVertex3f(right_wall,room_floor,front_wall);
-  glTexCoord2f(3.0f, 1.0f); glVertex3f(right_wall,room_floor,back_wall);
-  glTexCoord2f(0.0f, 1.0f); glVertex3f(left_wall,room_floor,back_wall);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
+  draw_face({ right_wall }, { room_floor, room_ceiling }, { front_wall, back_wall } );
+  draw_face({ left_wall }, { room_floor, room_ceiling }, { front_wall, back_wall } );
   
+  draw_face({ right_wall, left_wall }, { room_floor }, { front_wall, back_wall });
+  draw_face({ right_wall, left_wall }, { room_ceiling }, { front_wall, back_wall });
   
-  /* Ceiling */
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("darkwood.jpg");
-  glBegin(GL_QUADS);
-  glTexCoord2f(0.0f, 0.0f); glVertex3f(left_wall,room_ceiling,back_wall);
-  glTexCoord2f(4.0f, 0.0f); glVertex3f(right_wall,room_ceiling,back_wall);
-  glTexCoord2f(4.0f, 1.0f); glVertex3f(right_wall,room_ceiling,front_wall);
-  glTexCoord2f(0.0f, 1.0f); glVertex3f(left_wall,room_ceiling,front_wall);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  
-  /* Walls */
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("darkwood.jpg");
-  glBegin(GL_QUADS);
-  glTexCoord2f(0.0f, 0.0f); glVertex3f(left_wall,room_floor,front_wall);
-  glTexCoord2f(2.0f, 0.0f); glVertex3f(right_wall,room_floor,front_wall);
-  glTexCoord2f(2.0f, 1.0f); glVertex3f(right_wall,room_ceiling,front_wall);
-  glTexCoord2f(0.0f, 1.0f); glVertex3f(left_wall,room_ceiling,front_wall);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("darkwood.jpg");
-  glBegin(GL_QUADS);
-  glTexCoord2f(0.0f, 0.0f); glVertex3f(left_wall,room_floor,back_wall);
-  glTexCoord2f(2.0f, 0.0f); glVertex3f(right_wall,room_floor,back_wall);
-  glTexCoord2f(2.0f, 1.0f); glVertex3f(right_wall,room_ceiling,back_wall);
-  glTexCoord2f(0.0f, 1.0f); glVertex3f(left_wall,room_ceiling,back_wall);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("darkwood.jpg");
-  glBegin(GL_QUADS);
-  glTexCoord2f(2.0f, 1.0f); glVertex3f(right_wall,room_ceiling,front_wall);
-  glTexCoord2f(2.0f, 0.0f); glVertex3f(right_wall,room_floor,front_wall);
-  glTexCoord2f(0.0f, 0.0f); glVertex3f(right_wall,room_floor,back_wall);
-  glTexCoord2f(0.0f, 1.0f); glVertex3f(right_wall,room_ceiling,back_wall);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  
-  glEnable(GL_TEXTURE_2D);
-  TextureManager::Instance()->BindTexture("darkwood.jpg");
-  glBegin(GL_QUADS);
-  glTexCoord2f(2.0f, 1.0f); glVertex3f(left_wall,room_ceiling,front_wall);
-  glTexCoord2f(2.0f, 0.0f); glVertex3f(left_wall,room_floor,front_wall);
-  glTexCoord2f(0.0f, 0.0f); glVertex3f(left_wall,room_floor,back_wall);
-  glTexCoord2f(0.0f, 1.0f); glVertex3f(left_wall,room_ceiling,back_wall);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  
+  draw_face({ right_wall, left_wall }, { room_floor, room_ceiling }, { front_wall });
+  draw_face({ right_wall, left_wall }, { room_floor, room_ceiling }, { back_wall });
   
   glPopMatrix();
 
@@ -107,6 +53,34 @@ void Room::draw()
   }
 
   
+}
+
+void Room::draw_face(vector<float> x, vector<float> y, vector<float> z)
+{
+  float tex_x = 0.0f;
+  float tex_y = 0.0f;
+  int step = 0;
+  
+  glEnable(GL_TEXTURE_2D);
+  TextureManager::Instance()->BindTexture("darkwood.jpg");
+  glBegin(GL_QUADS);
+  for (vector<float>::iterator i = x.begin(); i != x.end(); ++i) {
+    for (vector<float>::iterator j = y.begin(); j != y.end(); ++j) {
+      for (vector<float>::iterator k = z.begin(); k != z.end(); ++k) {
+        glTexCoord2f(tex_x, tex_y); glVertex3f(*i, *j, *k);
+        switch (step++) {
+          case 0: tex_x = 2.0; break;
+          case 1: tex_y = 1.0; break;
+          case 2: tex_x = 0.0; break;
+          case 3: tex_y = 0.0; break;
+        }
+      }
+      reverse(z.begin(), z.end());
+    }
+    reverse(y.begin(), y.end());
+  }
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
 }
 
 float Room::get_width()

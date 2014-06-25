@@ -32,6 +32,8 @@ private:
 
 	vector<Piece*> pieces;
   
+  void draw_face(vector<float> x, vector<float> y, vector<float> z);
+  
 public:
   Room();
   void clip(float &x, float &z);
