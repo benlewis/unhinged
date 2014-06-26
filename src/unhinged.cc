@@ -221,21 +221,23 @@ int main(int argc, char **argv) {
   glutFullScreen();
   
   glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
   glEnable(GL_LIGHT2);
-	glEnable(GL_NORMALIZE);
-	glShadeModel(GL_SMOOTH);
-	glDisable(GL_COLOR_MATERIAL);
-  
+  glEnable(GL_NORMALIZE);
+  glShadeModel(GL_SMOOTH);
+  glDisable(GL_COLOR_MATERIAL);
+
+
+  // Load textures first
   TextureManager::Instance()->LoadTextures({
     "marble.jpg",
     "rust.jpg",
     "darkwood.jpg",
     "wall.jpg"
   });
-
+  
   // Setup our display callbacks
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
