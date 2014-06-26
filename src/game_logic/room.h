@@ -28,22 +28,22 @@ class Piece;
 
 class Room {
 private:
-  GLfloat left_wall, right_wall;
-  GLfloat room_ceiling, room_floor;
-  GLfloat front_wall, back_wall;
+  GLfloat left_wall_, right_wall_;
+  GLfloat room_ceiling_, room_floor_;
+  GLfloat front_wall_, back_wall_;
   
-  GLfloat clipping_plane = 0.15f;
-	GLfloat board_width = 20.0f;
-	GLfloat board_length = 10.0f;
-	GLfloat board_height = 10.0f;
+  GLfloat clipping_plane_ = 0.15f;
+	GLfloat board_width_ = 20.0f;
+	GLfloat board_length_ = 10.0f;
+	GLfloat board_height_ = 10.0f;
 
-	vector<Piece*> pieces;
+	vector<Piece*> pieces_;
   
-  void draw_face(vector<float> x, vector<float> y, vector<float> z);
+  void DrawFace(vector<float> x, vector<float> y, vector<float> z);
   
 public:
   Room();
-  void clip(GLfloat &x, GLfloat &z);
+  void Clip(GLfloat &x, GLfloat &z);
   GLfloat get_width();
   GLfloat get_length();
   GLfloat get_height();
@@ -51,7 +51,7 @@ public:
 	GLfloat get_board_length();
 	GLfloat get_board_height();
 
-  void draw();
+  void Draw();
 
 };
 

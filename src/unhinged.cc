@@ -49,11 +49,11 @@ bool skip_mouse = false;
 // The room
 Room *room;
 
-void draw_room(void) {
-  room->draw();
+void DrawRoom(void) {
+  room->Draw();
 }
 
-void compute_angle() {
+void ComputeAngle() {
   // update camera's direction
   x_angle = sin(3.14159f / 2.0f * mouse_x_location);
   z_angle = -cos(3.14159f / 2.0f * mouse_x_location);
@@ -65,7 +65,7 @@ void compute_angle() {
   ly = y_angle;
 }
 
-void compute_pos() {
+void ComputePosition() {
   GLfloat delta_move = 0.0f;
   if (keys['w'] == 1)
       delta_move += 1.0;
@@ -81,10 +81,10 @@ void compute_pos() {
 	x += delta_move * x_angle * speed - delta_side * z_angle * speed;;
 	z += delta_move * z_angle * speed + delta_side * x_angle * speed;
     
-  room->clip(x, z);
+  room->Clip(x, z);
 }
 
-void reshape(int w, int h) {
+void Reshape(int w, int h) {
   // Prevent a divide by zero, when window is too short
 	// (you cant make a window of zero width).
 	if (h == 0)
@@ -115,7 +115,7 @@ void reshape(int w, int h) {
   after_reshape = true;
 }
 
-void display(void) {
+void Display(void) {
   // Clear Color and Depth Buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -123,8 +123,8 @@ void display(void) {
 	glLoadIdentity();
     
   // Move and position if necessary
-  compute_angle();
-  compute_pos();
+  ComputeAngle();
+  ComputePosition();
 
 	// Set the camera
 	//printf("x: %.2f, head_height: %.2f, z: %.2f, lx: %.2f, ly: %.2f, lz: %.2f\n", x, head_height, z, lx, ly, lz);
@@ -134,16 +134,16 @@ void display(void) {
       x+lx,   ly,   z+lz,
       0.0f,   1.0f,   0.0f);
   
-  draw_room();
+  DrawRoom();
   
   glutSwapBuffers();
 }
 
-void releaseKey(unsigned char key, int x, int y) {
+void ReleaseKey(unsigned char key, int x, int y) {
   keys[tolower(key)] = 0;
 }
 
-void pressKey(unsigned char key, int xx, int yy) {
+void PressKey(unsigned char key, int xx, int yy) {
   if (key == 27) {
       exit(0);
   }
@@ -151,11 +151,11 @@ void pressKey(unsigned char key, int xx, int yy) {
 	keys[tolower(key)] = 1;
 }
 
-void mouseFunc(int button, int state, int x, int y) {
+void MouseFunc(int button, int state, int x, int y) {
 
 }
 
-void move_cursor_to_center() {
+void MoveCursorToCenter() {
   // Warp back to center. But use non-glut methods on Apple
   // Glut has a .25 delay on Apple when you warp. This causes a stutter
   // This fix is recommended at
@@ -171,7 +171,7 @@ void move_cursor_to_center() {
 
 }
 
-void mouseMove(int x, int y) {
+void MouseMove(int x, int y) {
 	if (skip_mouse == true) {
 		skip_mouse = false;
 		return;
@@ -187,7 +187,7 @@ void mouseMove(int x, int y) {
   if (after_reshape) {
       // Don't just move, since we didn't start off at center
       after_reshape = false;
-      move_cursor_to_center();
+      MoveCursorToCenter();
       return;
   }
 
@@ -204,11 +204,11 @@ void mouseMove(int x, int y) {
   if (mouse_x_location < -2.0f)
     mouse_x_location += 4.0f;
   
-  move_cursor_to_center();
+  MoveCursorToCenter();
 }
  
-void idle() {
-    display();
+void Idle() {
+    Display();
 }
 
 int main(int argc, char **argv) {
@@ -239,19 +239,19 @@ int main(int argc, char **argv) {
   });
   
   // Setup our display callbacks
-  glutDisplayFunc(display);
-  glutReshapeFunc(reshape);
-  glutIdleFunc(idle);
+  glutDisplayFunc(Display);
+  glutReshapeFunc(Reshape);
+  glutIdleFunc(Idle);
 
   // Handle keyboard down/up
-  glutKeyboardFunc(pressKey);
-  glutKeyboardUpFunc(releaseKey);
+  glutKeyboardFunc(PressKey);
+  glutKeyboardUpFunc(ReleaseKey);
   glutIgnoreKeyRepeat(1);
 
   // Handle mouse events
   glutSetCursor(GLUT_CURSOR_NONE);
-  glutPassiveMotionFunc(mouseMove);
-  glutMouseFunc(mouseFunc);
+  glutPassiveMotionFunc(MouseMove);
+  glutMouseFunc(MouseFunc);
 
   room = new Room();
 

@@ -11,22 +11,22 @@
 
 Room::Room() {
   // Establish parameters, probably should be in a configuration manager
-  left_wall = -2.0f;
-  right_wall = 2.0f;
-  room_ceiling = 1.0f;
-  room_floor = -1.0f;
-  front_wall = 2.0f;
-  back_wall = -2.0f;
+  left_wall_ = -2.0f;
+  right_wall_ = 2.0f;
+  room_ceiling_ = 1.0f;
+  room_floor_ = -1.0f;
+  front_wall_ = 2.0f;
+  back_wall_ = -2.0f;
   
   Material *gold = new Material(MATERIAL_GOLD);
   Material *bronze = new Material(MATERIAL_BRONZE);
   
-	pieces.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
-	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, bronze));
-	pieces.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
+	pieces_.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
+	pieces_.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, bronze));
+	pieces_.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
 }
 
-void Room::draw() {
+void Room::Draw() {
   GLfloat ambientLight[] = {0.2f, 0.2f, 0.2f, 1.0f};
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
   
@@ -47,28 +47,28 @@ void Room::draw() {
   glPushMatrix();
   glShadeModel(GL_SMOOTH);
 
-  draw_face({ right_wall }, { room_floor, room_ceiling }, { front_wall, back_wall } );
-  draw_face({ left_wall }, { room_floor, room_ceiling }, { front_wall, back_wall } );
+  DrawFace({ right_wall_ }, { room_floor_, room_ceiling_ }, { front_wall_, back_wall_ } );
+  DrawFace({ left_wall_ }, { room_floor_, room_ceiling_ }, { front_wall_, back_wall_ });
   
-  draw_face({ right_wall, left_wall }, { room_floor }, { front_wall, back_wall });
-  draw_face({ right_wall, left_wall }, { room_ceiling }, { front_wall, back_wall });
+  DrawFace({ right_wall_, left_wall_ }, { room_floor_ }, { front_wall_, back_wall_ });
+  DrawFace({ right_wall_, left_wall_ }, { room_ceiling_ }, { front_wall_, back_wall_ });
   
-  draw_face({ right_wall, left_wall }, { room_floor, room_ceiling }, { front_wall });
-  draw_face({ right_wall, left_wall }, { room_floor, room_ceiling }, { back_wall });
+  DrawFace({ right_wall_, left_wall_ }, { room_floor_, room_ceiling_ }, { front_wall_ });
+  DrawFace({ right_wall_, left_wall_ }, { room_floor_, room_ceiling_ }, { back_wall_ });
   
   glPopMatrix();
 
   vector<Piece*>::iterator it;
-  for (it = pieces.begin(); it != pieces.end(); ++it) {
+  for (it = pieces_.begin(); it != pieces_.end(); ++it) {
     Piece *piece = *it;
-    piece->update(0);
-    piece->draw();
+    piece->Update(0);
+    piece->Draw();
   }
 
   
 }
 
-void Room::draw_face(vector<float> x, vector<float> y, vector<float> z)
+void Room::DrawFace(vector<float> x, vector<float> y, vector<float> z)
 {
   GLfloat tex_x = 0.0f;
   GLfloat tex_y = 0.0f;
@@ -97,36 +97,36 @@ void Room::draw_face(vector<float> x, vector<float> y, vector<float> z)
 }
 
 GLfloat Room::get_width() {
-    return right_wall - left_wall;
+    return right_wall_ - left_wall_;
 }
 
 GLfloat Room::get_length() {
-    return front_wall - back_wall;
+    return front_wall_ - back_wall_;
 }
 
 GLfloat Room::get_height() {
-    return room_ceiling - room_floor;
+    return room_ceiling_ - room_floor_;
 }
 
 GLfloat Room::get_board_width() {
-	return board_width;
+	return board_width_;
 }
 
 GLfloat Room::get_board_length() {
-	return board_length;
+	return board_length_;
 }
 
 GLfloat Room::get_board_height() {
-	return board_height;
+	return board_height_;
 }
 
-void Room::clip(GLfloat &x, GLfloat &z) {
-    if (x < left_wall + clipping_plane)
-        x = left_wall + clipping_plane;
-    if (x > right_wall - clipping_plane)
-        x = right_wall - clipping_plane;
-    if (z > front_wall - clipping_plane)
-        z = front_wall - clipping_plane;
-    if (z < back_wall + clipping_plane)
-        z = back_wall + clipping_plane;
+void Room::Clip(GLfloat &x, GLfloat &z) {
+    if (x < left_wall_ + clipping_plane_)
+        x = left_wall_ + clipping_plane_;
+    if (x > right_wall_ - clipping_plane_)
+        x = right_wall_ - clipping_plane_;
+    if (z > front_wall_ - clipping_plane_)
+        z = front_wall_ - clipping_plane_;
+    if (z < back_wall_ + clipping_plane_)
+        z = back_wall_ + clipping_plane_;
 }

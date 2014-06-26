@@ -16,18 +16,18 @@ Piece::Piece(int x, int y, int z, Room *room): x_(x), y_(y), z_(z) {
 	this->draw_z_ = (GLfloat)z / room->get_board_length() * room->get_length() - room->get_length() / 2.0f;
 }
 
-void Piece::draw() {
+void Piece::Draw() {
 	glPushMatrix();
 	glTranslatef(draw_x_, draw_y_, draw_z_);
 	glCallList(list_);
 	glPopMatrix();
 }
 
-void Piece::update(int ticks) {
+void Piece::Update(int ticks) {
 	printf("base update\n");
 }
 
-void Piece::clip(GLfloat x_old, GLfloat y_old, GLfloat &x_new, GLfloat &y_new) {
+void Piece::Clip(GLfloat x_old, GLfloat y_old, GLfloat &x_new, GLfloat &y_new) {
     // Pieces don't clip by default
     return;
 }

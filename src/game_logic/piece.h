@@ -30,10 +30,6 @@
     - Take up a single game block of space
     - Has up to 6 faces, not all of which are outward facing
 
- Walls:
-    - Single face
-    - Clippable
-    - One has a door
 */
 
 
@@ -47,15 +43,15 @@ class Room;
 class Piece {
 public:
 	Piece(int x, int y, int z, Room *gr);
-  virtual void draw();
-  virtual void update(int ticks);
-  void clip(GLfloat x_old, GLfloat y_old, GLfloat &x_new, GLfloat &y_new);
+  virtual void Draw();
+  virtual void Update(int ticks);
+  void Clip(GLfloat x_old, GLfloat y_old, GLfloat &x_new, GLfloat &y_new);
     
 protected:
   int x_, y_, z_; // the game block location of the pice
   GLfloat draw_x_, draw_y_, draw_z_; // where we start drawing in screen space
   GLint list_; // for speedy drawing with glCallList
-	virtual void create_list() {}
+	virtual void CreateList() {}
 
 };
 

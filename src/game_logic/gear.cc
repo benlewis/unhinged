@@ -13,7 +13,7 @@
 
 #include "math.h"
 
-void Gear::update(int ticks)
+void Gear::Update(int ticks)
 {
 	switch (this->spin_direction_) {
 	case SPIN_CLOCKWISE:		angle_ += 1.0f; break;
@@ -22,7 +22,7 @@ void Gear::update(int ticks)
 	}
 }
 
-void Gear::draw()
+void Gear::Draw()
 {
 	glPushMatrix();
 	glTranslatef(draw_x_, draw_y_, draw_z_);
@@ -37,7 +37,7 @@ void Gear::draw()
  
   I added in the materials, but he did the actual Gear creation
 */
-void Gear::create_list()
+void Gear::CreateList()
 {
 	list_ = glGenLists(1);
 	glNewList(list_, GL_COMPILE);
