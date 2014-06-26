@@ -7,6 +7,7 @@
 //
 
 #include "game_logic/room.h"
+#include "render/material.h"
 
 Room::Room() {
   // Establish parameters, probably should be in a configuration manager
@@ -16,10 +17,12 @@ Room::Room() {
   room_floor = -1.0f;
   front_wall = 2.0f;
   back_wall = -2.0f;
-    
-	pieces.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
-	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f));
-	pieces.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f));
+  
+  Material *gold = new Material((GLfloat *)Material::material_gold);
+  
+	pieces.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
+	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, gold));
+	pieces.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
 }
 
 void Room::draw() {

@@ -20,6 +20,7 @@
 		CED4F39E195B2F5D002ED752 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = CED4F391195B2F5D002ED752 /* stb_image_aug.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		CED4F39F195B2F5D002ED752 /* unhinged.cc in Sources */ = {isa = PBXBuildFile; fileRef = CED4F395195B2F5D002ED752 /* unhinged.cc */; };
 		CED4F3A2195B2FAE002ED752 /* texture_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = CED4F3A0195B2FAE002ED752 /* texture_manager.cc */; };
+		CED4F3A5195BD1AA002ED752 /* material.cc in Sources */ = {isa = PBXBuildFile; fileRef = CED4F3A3195BD1AA002ED752 /* material.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,8 @@
 		CED4F395195B2F5D002ED752 /* unhinged.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unhinged.cc; sourceTree = "<group>"; };
 		CED4F3A0195B2FAE002ED752 /* texture_manager.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_manager.cc; sourceTree = "<group>"; };
 		CED4F3A1195B2FAE002ED752 /* texture_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_manager.h; sourceTree = "<group>"; };
+		CED4F3A3195BD1AA002ED752 /* material.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cc; sourceTree = "<group>"; };
+		CED4F3A4195BD1AA002ED752 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				CED4F3A0195B2FAE002ED752 /* texture_manager.cc */,
 				CED4F3A1195B2FAE002ED752 /* texture_manager.h */,
 				CED4F386195B2F5D002ED752 /* gl_headers.h */,
+				CED4F3A3195BD1AA002ED752 /* material.cc */,
+				CED4F3A4195BD1AA002ED752 /* material.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 				CED4F39B195B2F5D002ED752 /* image_DXT.c in Sources */,
 				CED4F39F195B2F5D002ED752 /* unhinged.cc in Sources */,
 				CED4F39C195B2F5D002ED752 /* image_helper.c in Sources */,
+				CED4F3A5195BD1AA002ED752 /* material.cc in Sources */,
 				CED4F397195B2F5D002ED752 /* piece.cc in Sources */,
 				CED4F39E195B2F5D002ED752 /* stb_image_aug.c in Sources */,
 				CED4F39D195B2F5D002ED752 /* SOIL.c in Sources */,

@@ -10,6 +10,7 @@
 #define __osx_unhinged__gear__
 
 #include "game_logic/piece.h"
+#include "render/material.h"
 
 enum Direction {
 	SPIN_CLOCKWISE,
@@ -19,8 +20,8 @@ enum Direction {
 
 class Gear : public Piece {
 public:
-	Gear(int x, int y, int z, Room *room, Direction spin_direction, GLfloat angle) :
-		Piece(x, y, z, room), spin_direction_(spin_direction), angle_(angle)  {
+	Gear(int x, int y, int z, Room *room, Direction spin_direction, GLfloat angle, Material *material) :
+		Piece(x, y, z, room), spin_direction_(spin_direction), angle_(angle), material_(material)  {
 		create_list(); 
 	}
 	void update(int ticks);
@@ -30,7 +31,8 @@ private:
   void create_list();
 	GLfloat angle_ = 0.0f;
 	Direction spin_direction_;
-
+  Material *material_;
+  
 };
 
 #endif /* defined(__osx_unhinged__gear__) */
