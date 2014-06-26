@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\game_logic\facet.cc" />
     <ClCompile Include="..\..\src\game_logic\gear.cc" />
     <ClCompile Include="..\..\src\game_logic\piece.cc" />
     <ClCompile Include="..\..\src\game_logic\room.cc" />
@@ -95,6 +96,7 @@
     <ClCompile Include="..\..\src\unhinged.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\game_logic\facet.h" />
     <ClInclude Include="..\..\src\game_logic\gear.h" />
     <ClInclude Include="..\..\src\game_logic\piece.h" />
     <ClInclude Include="..\..\src\game_logic\room.h" />

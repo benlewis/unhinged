@@ -63,6 +63,9 @@
     <ClCompile Include="..\..\src\render\material.cc">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\game_logic\facet.cc">
+      <Filter>game_logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\third_party\SOIL\image_DXT.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\material.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game_logic\facet.h">
+      <Filter>game_logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
