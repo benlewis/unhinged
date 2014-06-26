@@ -8,40 +8,19 @@
 
 #include "render/material.h"
 
-
-//
-//
-// A big thanks to http://www.it.hiof.no/~borres/j3d/explain/light/p-materials.html
-// For providing these materials
-//
-//
-
-GLfloat* material_gold() {
-  GLfloat mat[13] = {
-    0.24725f, 0.1995f, 0.0745f, 1.0f, // ambient
-    0.75164f, 0.60648f, 0.22648f, 1.0f, // diffuse
-    0.628281f, 0.555802f, 0.366065f, 1.0f, // specular
-    51.2f}; // shines
-  
-  return mat;
-}
-
-constexpr static GLfloat material_bronze[13] = {
-  0.329412f, 0.223529f, 0.027451f, 1.0f,
-  0.780392f, 0.568627f, 0.113725f, 1.0f,
-  0.992157f, 0.941176f, 0.807843f, 1.0f,
-  27.8974f};
-
 //
 // Sets member variables based on the input data
-// The format is defined in the material_XXXX consts in the .h file
+// The format is defined in the material_XXXX #defines in the .h file
 // This seems more efficient than storing the data in a file
 //
-Material::Material(GLfloat *input_data) {
-  this->ambient_  = &input_data[0];
-  this->diffuse_  = &input_data[4 * sizeof(GLfloat)];
-  this->specular_ = &input_data[8 * sizeof(GLfloat)];
-  this->shine_    = input_data[12 * sizeof(GLfloat)];
+Material::Material(GLfloat a, GLfloat b, GLfloat c, GLfloat d, GLfloat e, GLfloat f,
+                   GLfloat g, GLfloat h, GLfloat i, GLfloat j, GLfloat k, GLfloat l,
+                   GLfloat m) {
+  ambient_[0]  = a; ambient_[1]  = b; ambient_[2]  = c; ambient_[3]  = d;
+  diffuse_[0]  = e; diffuse_[1]  = f; diffuse_[2]  = g; diffuse_[3]  = h;
+  specular_[0] = i; specular_[1] = j; specular_[2] = k; specular_[3] = l;
+  shine_ = m;
+
 }
 
 void Material::EnableMaterial() {

@@ -78,6 +78,7 @@
     <ClCompile Include="..\..\src\game_logic\gear.cc" />
     <ClCompile Include="..\..\src\game_logic\piece.cc" />
     <ClCompile Include="..\..\src\game_logic\room.cc" />
+    <ClCompile Include="..\..\src\render\material.cc" />
     <ClCompile Include="..\..\src\render\texture_manager.cc" />
     <ClCompile Include="..\..\src\third_party\SOIL\image_DXT.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
@@ -98,6 +99,7 @@
     <ClInclude Include="..\..\src\game_logic\piece.h" />
     <ClInclude Include="..\..\src\game_logic\room.h" />
     <ClInclude Include="..\..\src\render\gl_headers.h" />
+    <ClInclude Include="..\..\src\render\material.h" />
     <ClInclude Include="..\..\src\render\texture_manager.h" />
     <ClInclude Include="..\..\src\third_party\scoped_ptr\scoped_ptr.h" />
     <ClInclude Include="..\..\src\third_party\SOIL\image_DXT.h" />

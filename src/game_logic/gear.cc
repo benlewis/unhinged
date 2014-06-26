@@ -42,17 +42,7 @@ void Gear::create_list()
 	list_ = glGenLists(1);
 	glNewList(list_, GL_COMPILE);
   
-//  //Gold
-//  GLfloat mat_ambient[4] = { 0.24725f, 0.1995f, 0.0745f, 1.0f };
-//  GLfloat mat_diffuse[4] = {0.75164f, 0.60648f, 0.22648f, 1.0f };
-//  GLfloat mat_specular[4] = {0.628281f, 0.555802f, 0.366065f, 1.0f };
-//  GLfloat shine = 51.2f;
-  
-//  // Setup Bronze
-//  GLfloat mat_ambient[4] = { 0.329412f, 0.223529f, 0.027451f,1.0f };
-//  GLfloat mat_diffuse[4] = { 0.780392f, 0.568627f, 0.113725f, 1.0f };
-//  GLfloat mat_specular[4] = { 0.992157f, 0.941176f, 0.807843f, 1.0f };
-//  GLfloat shine = 27.8974f;
+  material_->EnableMaterial();
 
 	GLfloat inner_radius = 0.04f;
 	GLfloat outer_radius = 0.099f;

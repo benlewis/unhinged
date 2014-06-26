@@ -18,10 +18,11 @@ Room::Room() {
   front_wall = 2.0f;
   back_wall = -2.0f;
   
-  Material *gold = new Material((GLfloat *)Material::material_gold);
+  Material *gold = new Material(MATERIAL_GOLD);
+  Material *bronze = new Material(MATERIAL_BRONZE);
   
 	pieces.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
-	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, gold));
+	pieces.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, bronze));
 	pieces.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
 }
 
