@@ -48,4 +48,11 @@ public:
   0.992157f, 0.941176f, 0.807843f, 1.0f, \
   27.8974f
 
+#define MATERIAL_CYAN_PLASTIC \
+  0.0f, 0.1f, 0.06f, 1.0f, \
+  0.0f, 0.50980392f, 0.50980392f, 1.0f, \
+  0.50196078f, 0.50196078f, 0.50196078f, 1.0f, \
+  32.0f
+
+
 #endif /* defined(__osx_unhinged__material__) */

@@ -7,6 +7,8 @@
 //
 
 #include "game_logic/room.h"
+#include "game_logic/box.h"
+
 #include "render/material.h"
 
 Room::Room() {
@@ -24,13 +26,15 @@ Room::Room() {
 	pieces_.push_back(new Gear(10, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
 	pieces_.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, bronze));
 	pieces_.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
+  
+  box_ = new Box(9, 4, 5, 2, 2, 1, this);
 }
 
 void Room::Draw() {
   GLfloat ambientLight[] = {0.2f, 0.2f, 0.2f, 1.0f};
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
   
-  GLfloat lightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
+  GLfloat lightColor[] = {0.3f, 0.3f, 0.3f, 1.0f};
   GLfloat lightPos[] = {0.0f, 0.0f, -2.0f, 1.0f};
   GLfloat backPos[] = {0.0f, 0.0f, 2.0f, 1.0f};
   GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
@@ -58,14 +62,14 @@ void Room::Draw() {
   
   glPopMatrix();
 
-  vector<Piece*>::iterator it;
-  for (it = pieces_.begin(); it != pieces_.end(); ++it) {
-    Piece *piece = *it;
-    piece->Update(0);
-    piece->Draw();
-  }
+//  vector<Piece*>::iterator it;
+//  for (it = pieces_.begin(); it != pieces_.end(); ++it) {
+//    Piece *piece = *it;
+//    piece->Update(0);
+//    piece->Draw();
+//  }
 
-  
+  box_->Draw();
 }
 
 void Room::DrawFace(vector<float> x, vector<float> y, vector<float> z)

@@ -8,6 +8,19 @@
 
 #include "game_logic/facet.h"
 
-Facet::Facet() {
+bool Facet::AddGear(Gear* gear) {
+  if (HasGear()) {
+    return false;
+  } else {
+    this->gear_ = gear;
+    return true;
+  }
+}
 
+void Facet::RemoveGear(Gear* gear) {
+  this->gear_ = nullptr;
+}
+
+bool Facet::HasGear() {
+  return (gear_ != nullptr);
 }

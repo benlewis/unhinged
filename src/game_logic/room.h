@@ -25,6 +25,7 @@
 using namespace std;
 
 class Piece;
+class Box;
 
 class Room {
 private:
@@ -38,6 +39,7 @@ private:
 	GLfloat board_height_ = 10.0f;
 
 	vector<Piece*> pieces_;
+  Box *box_;
   
   void DrawFace(vector<float> x, vector<float> y, vector<float> z);
   
