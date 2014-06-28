@@ -54,5 +54,10 @@ public:
   0.50196078f, 0.50196078f, 0.50196078f, 1.0f, \
   32.0f
 
+#define MATERIAL_OBSIDIAN \
+  0.05375f, 0.05f, 0.06625f, 0.82f, \
+  0.18275f, 0.17f, 0.22525f, 0.82f, \
+  0.332741f, 0.328634f, 0.346435f, 0.82f, \
+  38.4f
 
 #endif /* defined(__osx_unhinged__material__) */

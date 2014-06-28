@@ -18,7 +18,8 @@ Material::Material(GLfloat a, GLfloat b, GLfloat c, GLfloat d, GLfloat e, GLfloa
                    GLfloat m) {
   ambient_[0]  = a; ambient_[1]  = b; ambient_[2]  = c; ambient_[3]  = d;
   diffuse_[0]  = e; diffuse_[1]  = f; diffuse_[2]  = g; diffuse_[3]  = h;
-  specular_[0] = i; specular_[1] = j; specular_[2] = k; specular_[3] = l;
+  specular_[0] = i / 5.0f; specular_[1] = j / 5.0f; specular_[2] = k / 5.0f; specular_[3] = l / 5.0f;
+  
   shine_ = m;
 
 }

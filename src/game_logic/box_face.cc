@@ -11,6 +11,7 @@
 #include "game_logic/box_face.h"
 #include "game_logic/box.h"
 #include "game_logic/facet.h"
+#include "game_logic/gear.h"
 
 BoxFace::BoxFace(FaceSide face_side, Box *box, Material *material) :
 face_side_(face_side), box_(box), material_(material) {
@@ -29,44 +30,77 @@ face_side_(face_side), box_(box), material_(material) {
 void BoxFace::Draw() {
   glPushMatrix();
   material_->EnableMaterial();
-  GLfloat mult_width = 1.0f;
-  GLfloat mult_height = 1.0f;
   
   switch (face_side_) {
-    case FACE_FRONT: glNormal3d(0, 0, 1); break; // no rotate
-    case FACE_BACK: glTranslatef(0.0f, 0.0f, -box_->get_draw_length());
-      glRotatef(180.0f, 0.0f, 1.0f, 0.0f); glNormal3d(0, 0, -1); mult_width = -1.0f; break;
-    case FACE_LEFT: glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(-1, 0, 0); mult_width = -1.0f; break;
-    case FACE_RIGHT: glTranslatef(box_->get_draw_width(), 0.0f, 0.0f);
-      glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(1, 0, 0); mult_width = -1.0f; break;
-    case FACE_TOP: glTranslatef(0.0f, box_->get_draw_height(), 0.0f);
-      glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, 1, 0);  break;
-    case FACE_BOTTOM: glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, -1, 0);  break;
+    case FACE_FRONT:
+      glNormal3d(0, 0, 1); break;
+    case FACE_BACK:
+      glTranslatef(box_->get_draw_width(), 0.0f, -box_->get_draw_length());
+      glRotatef(180.0f, 0.0f, 1.0f, 0.0f); glNormal3d(0, 0, -1); break;
+    case FACE_LEFT:
+      glTranslatef(0.0f, 0.0f, -box_->get_draw_length());
+      glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(-1, 0, 0); break;
+    case FACE_RIGHT:
+      glTranslatef(box_->get_draw_width(), 0.0f, 0.0f);
+      glRotatef(90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(1, 0, 0); break;
+    case FACE_TOP:
+      glTranslatef(0.0f, box_->get_draw_height(), 0.0f);
+      glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, 1, 0); break;
+    case FACE_BOTTOM:
+      glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, -1, 0); break;
   }
   
-  GLfloat dx = 0.0f; //box_->get_draw_x();
-  GLfloat dy = 0.0f; //box_->get_draw_y();
-  
   glBegin(GL_QUADS);
-  glVertex2f(dx, dy);
-  glVertex2f(dx + mult_width * draw_width_, dy);
-  glVertex2f(dx + mult_width * draw_width_, dy + mult_height * draw_height_);
-  glVertex2f(dx, dy + mult_height * draw_height_);
+  glVertex2f(0.0f, 0.0f);
+  glVertex2f(draw_width_, 0.0f);
+  glVertex2f(draw_width_, draw_height_);
+  glVertex2f(0.0f, draw_height_);
   glEnd();
   
   // Cycle through each facet and draw pegs and gears if necessary
+  for (int i = 0; i < width_; i++) {
+    for (int j = 0; j < height_; j++) {
+      if (facets_[i][j]->HasPeg()) {
+        glPushMatrix();
+        glTranslatef(get_facet_width() * i, get_facet_height() * j, 0.0f);
+        facets_[i][j]->Draw();
+        glPopMatrix();
+      }
+    }
+  }
+  
   
   glPopMatrix();
 }
 
 void BoxFace::SetupFacets() {
   facets_.resize(width_);
+  Material *peg_mat = new Material(MATERIAL_OBSIDIAN);
+  
   for (int i = 0; i < width_; i++) {
     facets_[i].resize(height_);
     for (int j = 0; j < height_; j++) {
       // Debug: set the front face to have pegs
-      facets_[i][j] = new Facet((face_side_ == FACE_FRONT),
-                                nullptr, this, i, j);
+      facets_[i][j] = new Facet((face_side_ == FACE_FRONT || face_side_ == FACE_LEFT || face_side_ == FACE_RIGHT || face_side_ == FACE_BACK),
+                                nullptr, this, peg_mat, i, j);
     }
+  }
+  
+  Material *gold = new Material(MATERIAL_GOLD);
+  
+  if (face_side_ == FACE_FRONT) {
+    facets_[0][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
+    facets_[1][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
+    facets_[2][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
+    facets_[3][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
+  } else if (face_side_ == FACE_RIGHT) {
+    facets_[0][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
+  } else if (face_side_ == FACE_LEFT) {
+    facets_[0][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
+  } else   if (face_side_ == FACE_BACK) {
+    facets_[0][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
+    facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
+    facets_[2][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
+    facets_[3][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
   }
 }

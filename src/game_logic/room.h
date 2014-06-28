@@ -35,7 +35,7 @@ private:
   
   GLfloat clipping_plane_ = 0.15f;
 	GLfloat board_width_ = 20.0f;
-	GLfloat board_length_ = 10.0f;
+	GLfloat board_length_ = 20.0f;
 	GLfloat board_height_ = 10.0f;
 
 	vector<Piece*> pieces_;

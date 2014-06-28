@@ -18,7 +18,7 @@ using namespace std;
 
 class Facet;
 class Box;
-class material;
+class Material;
 
 enum FaceSide {
   FACE_FRONT = 0,
@@ -33,6 +33,8 @@ class BoxFace {
 public:
   BoxFace(FaceSide face_side, Box *box, Material *material);
   void Draw();
+  GLfloat get_facet_width() { return draw_width_ / (GLfloat)width_; }
+  GLfloat get_facet_height() { return draw_height_ / (GLfloat)height_; }
   
 private:
   // What other faces do we touch

@@ -13,11 +13,21 @@
 
 #include "math.h"
 
+Gear::Gear(Direction spin_direction, Material *material):
+spin_direction_(spin_direction), material_(material)  {
+  switch (spin_direction_) {
+    case SPIN_CLOCKWISE:	angle_ = 0.0f; break;
+    case SPIN_COUNTERCLOCKWISE:	angle_ = -6.5f; break;
+    case SPIN_NONE: angle_ = 0.0f;
+  }
+  CreateList();
+}
+
 void Gear::Update(int ticks)
 {
-	switch (this->spin_direction_) {
-	case SPIN_CLOCKWISE:		angle_ += 1.0f; break;
-	case SPIN_COUNTERCLOCKWISE:	angle_ -= 1.0f; break;
+	switch (spin_direction_) {
+	case SPIN_CLOCKWISE:		angle_ -= 1.0f; break;
+	case SPIN_COUNTERCLOCKWISE:	angle_ += 1.0f; break;
 	case SPIN_NONE: break;
 	}
 }
@@ -25,7 +35,6 @@ void Gear::Update(int ticks)
 void Gear::Draw()
 {
 	glPushMatrix();
-	glTranslatef(draw_x_, draw_y_, draw_z_);
 	glRotatef(this->angle_, 0.0f, 0.0f, 1.0f);
 	glCallList(list_);
 	glPopMatrix();
@@ -45,10 +54,10 @@ void Gear::CreateList()
   material_->EnableMaterial();
 
 	GLfloat inner_radius = 0.04f;
-	GLfloat outer_radius = 0.099f;
+	GLfloat outer_radius = 0.094f;
 	GLfloat width = 0.02f;
 	GLint teeth = 10;
-	GLfloat tooth_depth = 0.03f;
+	GLfloat tooth_depth = 0.05f;
     
 	GLint i;
   GLfloat r0, r1, r2;
