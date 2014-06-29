@@ -27,7 +27,7 @@ Room::Room() {
 //	pieces_.push_back(new Gear(11, 5, 5, this, SPIN_COUNTERCLOCKWISE, -8.0f, bronze));
 //	pieces_.push_back(new Gear(12, 5, 5, this, SPIN_CLOCKWISE, 0.0f, gold));
   
-  box_ = new Box(8, 4, 10, 4, 1, 1, this);
+  box_ = new Box(8, 6, 10, 4, 1, 1, this);
 }
 
 void Room::Draw() {

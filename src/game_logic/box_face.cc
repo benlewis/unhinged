@@ -45,9 +45,10 @@ void BoxFace::Draw() {
       glRotatef(90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(1, 0, 0); break;
     case FACE_TOP:
       glTranslatef(0.0f, box_->get_draw_height(), 0.0f);
-      glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, 1, 0); break;
-    case FACE_BOTTOM:
       glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, -1, 0); break;
+    case FACE_BOTTOM:
+      glTranslatef(0.0f, 0.0f, -box_->get_draw_length());
+      glRotatef(90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, 1, 0); break;
   }
   
   glBegin(GL_QUADS);
@@ -81,7 +82,7 @@ void BoxFace::SetupFacets() {
     facets_[i].resize(height_);
     for (int j = 0; j < height_; j++) {
       // Debug: set the front face to have pegs
-      facets_[i][j] = new Facet((face_side_ == FACE_FRONT || face_side_ == FACE_LEFT || face_side_ == FACE_RIGHT || face_side_ == FACE_BACK),
+      facets_[i][j] = new Facet(true,
                                 nullptr, this, peg_mat, i, j);
     }
   }
@@ -97,10 +98,14 @@ void BoxFace::SetupFacets() {
     facets_[0][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
   } else if (face_side_ == FACE_LEFT) {
     facets_[0][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
-  } else   if (face_side_ == FACE_BACK) {
+  } else if (face_side_ == FACE_BACK) {
     facets_[0][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
     facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
     facets_[2][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
     facets_[3][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
+  } else if (face_side_ == FACE_TOP) {
+    facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
+  } else if (face_side_ == FACE_BOTTOM) {
+    facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
   }
 }

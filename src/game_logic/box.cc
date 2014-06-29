@@ -33,12 +33,12 @@ void Box::SetupFaces() {
 }
 
 void Box::Draw() {
-//  if (draw_y_ >= 1.0f - draw_height_ && y_inc > 0.0f) {
-//    y_inc *= -1.0f;
-//  } else if (draw_y_ <= -1.0f && y_inc < 0.0f) {
-//    y_inc *= -1.0f;
-//  }
-//  draw_y_ += y_inc;
+  if (draw_y_ >= 1.0f - draw_height_ && y_inc > 0.0f) {
+    y_inc *= -1.0f;
+  } else if (draw_y_ <= -1.0f && y_inc < 0.0f) {
+    y_inc *= -1.0f;
+  }
+  draw_y_ += y_inc;
   
   glPushMatrix();
   

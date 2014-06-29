@@ -54,10 +54,10 @@ void Gear::CreateList()
   material_->EnableMaterial();
 
 	GLfloat inner_radius = 0.04f;
-	GLfloat outer_radius = 0.094f;
+	GLfloat outer_radius = 0.099f;
 	GLfloat width = 0.02f;
 	GLint teeth = 10;
-	GLfloat tooth_depth = 0.05f;
+	GLfloat tooth_depth = 0.038f;
     
 	GLint i;
   GLfloat r0, r1, r2;
