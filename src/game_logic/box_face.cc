@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
+#include "render/material_manager.h"
 #include "render/material.h"
 
 #include "game_logic/box_face.h"
@@ -13,9 +14,9 @@
 #include "game_logic/facet.h"
 #include "game_logic/gear.h"
 
-BoxFace::BoxFace(FaceSide face_side, Box *box, Material *material) :
-face_side_(face_side), box_(box), material_(material) {
-  switch (face_side_) {
+BoxFace::BoxFace(FaceDirection face_direction, Box *box, Material *material) :
+face_direction_(face_direction), box_(box), material_(material) {
+  switch (face_direction_) {
     case FACE_FRONT:
     case FACE_BACK:  box_->SetWidths(width_, draw_width_); box_->SetHeights(height_, draw_height_); break;
     case FACE_LEFT:
@@ -31,7 +32,7 @@ void BoxFace::Draw() {
   glPushMatrix();
   material_->EnableMaterial();
   
-  switch (face_side_) {
+  switch (face_direction_) {
     case FACE_FRONT:
       glNormal3d(0, 0, 1); break;
     case FACE_BACK:
@@ -76,36 +77,17 @@ void BoxFace::Draw() {
 
 void BoxFace::SetupFacets() {
   facets_.resize(width_);
-  Material *peg_mat = new Material(MATERIAL_OBSIDIAN);
+  Material *peg_mat = MaterialManager::Instance()->get_material("obsidian");
   
   for (int i = 0; i < width_; i++) {
     facets_[i].resize(height_);
     for (int j = 0; j < height_; j++) {
-      // Debug: set the front face to have pegs
-      facets_[i][j] = new Facet(true,
-                                nullptr, this, peg_mat, i, j);
+      facets_[i][j] = new Facet(false,
+                                nullptr,
+                                this,
+                                peg_mat,
+                                i,
+                                j);
     }
-  }
-  
-  Material *gold = new Material(MATERIAL_GOLD);
-  
-  if (face_side_ == FACE_FRONT) {
-    facets_[0][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
-    facets_[1][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
-    facets_[2][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
-    facets_[3][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
-  } else if (face_side_ == FACE_RIGHT) {
-    facets_[0][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
-  } else if (face_side_ == FACE_LEFT) {
-    facets_[0][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
-  } else if (face_side_ == FACE_BACK) {
-    facets_[0][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
-    facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
-    facets_[2][0]->AddGear(new Gear(SPIN_COUNTERCLOCKWISE, gold));
-    facets_[3][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
-  } else if (face_side_ == FACE_TOP) {
-    facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
-  } else if (face_side_ == FACE_BOTTOM) {
-    facets_[1][0]->AddGear(new Gear(SPIN_CLOCKWISE, gold));
   }
 }

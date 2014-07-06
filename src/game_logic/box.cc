@@ -10,6 +10,8 @@
 #include "game_logic/room.h"
 #include "game_logic/box_face.h"
 
+#include "render/material_manager.h"
+
 Box::Box(int x, int y, int z, int width, int height, int length, Room *room):
 x_(x), y_(y), z_(z), width_(width), height_(height), length_(length), room_(room) {
   
@@ -25,20 +27,20 @@ x_(x), y_(y), z_(z), width_(width), height_(height), length_(length), room_(room
 }
 
 void Box::SetupFaces() {
-  Material *mat = new Material(MATERIAL_CYAN_PLASTIC);
+  Material *mat = MaterialManager::Instance()->get_material("cyan_plastic");
   for (int i = 0; i < 6; i++) {
-    faces_[i] = new BoxFace((FaceSide)i, this, mat);
+    faces_[i] = new BoxFace((FaceDirection)i, this, mat);
   }
   
 }
 
 void Box::Draw() {
-  if (draw_y_ >= 1.0f - draw_height_ && y_inc > 0.0f) {
-    y_inc *= -1.0f;
-  } else if (draw_y_ <= -1.0f && y_inc < 0.0f) {
-    y_inc *= -1.0f;
-  }
-  draw_y_ += y_inc;
+//  if (draw_y_ >= 1.0f - draw_height_ && y_inc > 0.0f) {
+//    y_inc *= -1.0f;
+//  } else if (draw_y_ <= -1.0f && y_inc < 0.0f) {
+//    y_inc *= -1.0f;
+//  }
+//  draw_y_ += y_inc;
   
   glPushMatrix();
   

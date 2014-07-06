@@ -9,10 +9,9 @@
 #ifndef __osx_unhinged__gear__
 #define __osx_unhinged__gear__
 
-#include "game_logic/piece.h"
 #include "render/material.h"
 
-enum Direction {
+enum Rotation {
 	SPIN_CLOCKWISE,
 	SPIN_COUNTERCLOCKWISE,
 	SPIN_NONE
@@ -26,7 +25,7 @@ enum Plane {
 
 class Gear {
 public:
-	Gear(Direction spin_direction, Material *material);
+	Gear(Rotation rotation, Material *material);
 
   void Update(int ticks);
 	void Draw();
@@ -34,7 +33,7 @@ public:
 private:
   virtual void CreateList();
 	GLfloat angle_ = 0.0f;
-	Direction spin_direction_;
+	Rotation rotation_;
   Material *material_;
   GLint list_; // for calling
   

@@ -13,9 +13,9 @@
 
 #include "math.h"
 
-Gear::Gear(Direction spin_direction, Material *material):
-spin_direction_(spin_direction), material_(material)  {
-  switch (spin_direction_) {
+Gear::Gear(Rotation rotation, Material *material):
+rotation_(rotation), material_(material)  {
+  switch (rotation_) {
     case SPIN_CLOCKWISE:	angle_ = 0.0f; break;
     case SPIN_COUNTERCLOCKWISE:	angle_ = -6.5f; break;
     case SPIN_NONE: angle_ = 0.0f;
@@ -25,7 +25,7 @@ spin_direction_(spin_direction), material_(material)  {
 
 void Gear::Update(int ticks)
 {
-	switch (spin_direction_) {
+	switch (rotation_) {
 	case SPIN_CLOCKWISE:		angle_ -= 1.0f; break;
 	case SPIN_COUNTERCLOCKWISE:	angle_ += 1.0f; break;
 	case SPIN_NONE: break;

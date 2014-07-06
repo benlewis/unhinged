@@ -20,7 +20,7 @@ class Facet;
 class Box;
 class Material;
 
-enum FaceSide {
+enum FaceDirection {
   FACE_FRONT = 0,
   FACE_BACK,
   FACE_LEFT,
@@ -31,7 +31,7 @@ enum FaceSide {
 
 class BoxFace {
 public:
-  BoxFace(FaceSide face_side, Box *box, Material *material);
+  BoxFace(FaceDirection face_direction, Box *box, Material *material);
   void Draw();
   GLfloat get_facet_width() { return draw_width_ / (GLfloat)width_; }
   GLfloat get_facet_height() { return draw_height_ / (GLfloat)height_; }
@@ -45,7 +45,7 @@ private:
   Box *box_;
   Material *material_;
   
-  FaceSide face_side_;
+  FaceDirection face_direction_;
   
   // size in game space
   int width_, height_;

@@ -11,11 +11,11 @@
 		CEA3D1F5195D1A7B00E760D3 /* facet.cc in Sources */ = {isa = PBXBuildFile; fileRef = CEA3D1F3195D1A7B00E760D3 /* facet.cc */; };
 		CEA3D1F8195D1AB900E760D3 /* box.cc in Sources */ = {isa = PBXBuildFile; fileRef = CEA3D1F6195D1AB900E760D3 /* box.cc */; };
 		CEA3D1FB195D345700E760D3 /* box_face.cc in Sources */ = {isa = PBXBuildFile; fileRef = CEA3D1F9195D345700E760D3 /* box_face.cc */; };
+		CEA3D1FE196A06A200E760D3 /* material_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = CEA3D1FC196A06A200E760D3 /* material_manager.cc */; };
 		CEC8BB3D194E0D09007E7DF0 /* osx_unhinged.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */; };
 		CEC8BB4C194E1024007E7DF0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */; };
 		CEC8BB4E194E1028007E7DF0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8BB4D194E1028007E7DF0 /* GLUT.framework */; };
 		CED4F396195B2F5D002ED752 /* gear.cc in Sources */ = {isa = PBXBuildFile; fileRef = CED4F37B195B2F5D002ED752 /* gear.cc */; };
-		CED4F397195B2F5D002ED752 /* piece.cc in Sources */ = {isa = PBXBuildFile; fileRef = CED4F37D195B2F5D002ED752 /* piece.cc */; };
 		CED4F398195B2F5D002ED752 /* room.cc in Sources */ = {isa = PBXBuildFile; fileRef = CED4F37F195B2F5D002ED752 /* room.cc */; };
 		CED4F39B195B2F5D002ED752 /* image_DXT.c in Sources */ = {isa = PBXBuildFile; fileRef = CED4F38B195B2F5D002ED752 /* image_DXT.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		CED4F39C195B2F5D002ED752 /* image_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = CED4F38D195B2F5D002ED752 /* image_helper.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -47,14 +47,14 @@
 		CEA3D1F7195D1AB900E760D3 /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box.h; sourceTree = "<group>"; };
 		CEA3D1F9195D345700E760D3 /* box_face.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box_face.cc; sourceTree = "<group>"; };
 		CEA3D1FA195D345700E760D3 /* box_face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box_face.h; sourceTree = "<group>"; };
+		CEA3D1FC196A06A200E760D3 /* material_manager.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material_manager.cc; sourceTree = "<group>"; };
+		CEA3D1FD196A06A200E760D3 /* material_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material_manager.h; sourceTree = "<group>"; };
 		CEC8BB37194E0D09007E7DF0 /* osx_unhinged */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = osx_unhinged; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC8BB3C194E0D09007E7DF0 /* osx_unhinged.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = osx_unhinged.1; sourceTree = "<group>"; };
 		CEC8BB4B194E1024007E7DF0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		CEC8BB4D194E1028007E7DF0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/GLUT.framework; sourceTree = DEVELOPER_DIR; };
 		CED4F37B195B2F5D002ED752 /* gear.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gear.cc; sourceTree = "<group>"; };
 		CED4F37C195B2F5D002ED752 /* gear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gear.h; sourceTree = "<group>"; };
-		CED4F37D195B2F5D002ED752 /* piece.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piece.cc; sourceTree = "<group>"; };
-		CED4F37E195B2F5D002ED752 /* piece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piece.h; sourceTree = "<group>"; };
 		CED4F37F195B2F5D002ED752 /* room.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = room.cc; sourceTree = "<group>"; };
 		CED4F380195B2F5D002ED752 /* room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = room.h; sourceTree = "<group>"; };
 		CED4F386195B2F5D002ED752 /* gl_headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_headers.h; sourceTree = "<group>"; };
@@ -146,8 +146,6 @@
 				CEA3D1F4195D1A7B00E760D3 /* facet.h */,
 				CED4F37B195B2F5D002ED752 /* gear.cc */,
 				CED4F37C195B2F5D002ED752 /* gear.h */,
-				CED4F37D195B2F5D002ED752 /* piece.cc */,
-				CED4F37E195B2F5D002ED752 /* piece.h */,
 				CED4F37F195B2F5D002ED752 /* room.cc */,
 				CED4F380195B2F5D002ED752 /* room.h */,
 				CEA3D1F6195D1AB900E760D3 /* box.cc */,
@@ -166,6 +164,8 @@
 				CED4F386195B2F5D002ED752 /* gl_headers.h */,
 				CED4F3A3195BD1AA002ED752 /* material.cc */,
 				CED4F3A4195BD1AA002ED752 /* material.h */,
+				CEA3D1FC196A06A200E760D3 /* material_manager.cc */,
+				CEA3D1FD196A06A200E760D3 /* material_manager.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -261,12 +261,12 @@
 				CED4F39C195B2F5D002ED752 /* image_helper.c in Sources */,
 				CEA3D1F5195D1A7B00E760D3 /* facet.cc in Sources */,
 				CED4F3A5195BD1AA002ED752 /* material.cc in Sources */,
-				CED4F397195B2F5D002ED752 /* piece.cc in Sources */,
 				CEA3D1F8195D1AB900E760D3 /* box.cc in Sources */,
 				CED4F39E195B2F5D002ED752 /* stb_image_aug.c in Sources */,
 				CED4F39D195B2F5D002ED752 /* SOIL.c in Sources */,
 				CED4F396195B2F5D002ED752 /* gear.cc in Sources */,
 				CED4F3A2195B2FAE002ED752 /* texture_manager.cc in Sources */,
+				CEA3D1FE196A06A200E760D3 /* material_manager.cc in Sources */,
 				CEA3D1FB195D345700E760D3 /* box_face.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

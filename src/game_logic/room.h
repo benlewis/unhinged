@@ -18,7 +18,6 @@
 
 #include "third_party/SOIL/SOIL.h"
 
-#include "game_logic/piece.h"
 #include "game_logic/gear.h"
 
 

@@ -12,7 +12,7 @@
 #define __osx_unhinged__box__
 
 #include "render/gl_headers.h"
-#include "render/material.h"
+
 
 #include <stdlib.h>
 #include <array>

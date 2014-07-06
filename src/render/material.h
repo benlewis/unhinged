@@ -29,35 +29,4 @@ public:
 
 };
 
-//
-//
-// A big thanks to http://www.it.hiof.no/~borres/j3d/explain/light/p-materials.html
-// For providing these materials
-//
-//
-
-#define MATERIAL_GOLD \
-    0.24725f, 0.1995f, 0.0745f, 1.0f, \
-    0.75164f, 0.60648f, 0.22648f, 1.0f, \
-    0.628281f, 0.555802f, 0.366065f, 1.0f, \
-    51.2f
-
-#define MATERIAL_BRONZE \
-  0.329412f, 0.223529f, 0.027451f, 1.0f, \
-  0.780392f, 0.568627f, 0.113725f, 1.0f, \
-  0.992157f, 0.941176f, 0.807843f, 1.0f, \
-  27.8974f
-
-#define MATERIAL_CYAN_PLASTIC \
-  0.0f, 0.1f, 0.06f, 1.0f, \
-  0.0f, 0.50980392f, 0.50980392f, 1.0f, \
-  0.50196078f, 0.50196078f, 0.50196078f, 1.0f, \
-  32.0f
-
-#define MATERIAL_OBSIDIAN \
-  0.05375f, 0.05f, 0.06625f, 0.82f, \
-  0.18275f, 0.17f, 0.22525f, 0.82f, \
-  0.332741f, 0.328634f, 0.346435f, 0.82f, \
-  38.4f
-
 #endif /* defined(__osx_unhinged__material__) */
