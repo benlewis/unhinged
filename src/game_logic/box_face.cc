@@ -34,23 +34,25 @@ void BoxFace::Draw() {
   
   switch (face_direction_) {
     case FACE_FRONT:
-      glNormal3d(0, 0, 1); break;
+      break;
     case FACE_BACK:
       glTranslatef(box_->get_draw_width(), 0.0f, -box_->get_draw_length());
-      glRotatef(180.0f, 0.0f, 1.0f, 0.0f); glNormal3d(0, 0, -1); break;
+      glRotatef(180.0f, 0.0f, 1.0f, 0.0f); break;
     case FACE_LEFT:
       glTranslatef(0.0f, 0.0f, -box_->get_draw_length());
-      glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(-1, 0, 0); break;
+      glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); break;
     case FACE_RIGHT:
       glTranslatef(box_->get_draw_width(), 0.0f, 0.0f);
-      glRotatef(90.0f, 0.0f, 1.0f, 0.0f); glNormal3d(1, 0, 0); break;
+      glRotatef(90.0f, 0.0f, 1.0f, 0.0f); break;
     case FACE_TOP:
       glTranslatef(0.0f, box_->get_draw_height(), 0.0f);
-      glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, -1, 0); break;
+      glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); break;
     case FACE_BOTTOM:
       glTranslatef(0.0f, 0.0f, -box_->get_draw_length());
-      glRotatef(90.0f, 1.0f, 0.0f, 0.0f); glNormal3d(0, 1, 0); break;
+      glRotatef(90.0f, 1.0f, 0.0f, 0.0f); break;
   }
+  
+  glNormal3d(0, 0, 1);
   
   glBegin(GL_QUADS);
   glVertex2f(0.0f, 0.0f);
@@ -82,7 +84,7 @@ void BoxFace::SetupFacets() {
   for (int i = 0; i < width_; i++) {
     facets_[i].resize(height_);
     for (int j = 0; j < height_; j++) {
-      facets_[i][j] = new Facet(false,
+      facets_[i][j] = new Facet(true,
                                 nullptr,
                                 this,
                                 peg_mat,

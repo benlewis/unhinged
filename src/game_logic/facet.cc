@@ -40,7 +40,7 @@ void Facet::Draw() {
     
     glTranslatef(dw / 2.0f, dh / 2.0f, 0.0f);
     
-    glTranslatef(0.0f, 0.0f, 0.005f);
+    glTranslatef(0.0f, 0.0f, 0.025f);
     glutSolidSphere(radius, 16, 16);
     if (HasGear()) {
       // Make the gear a bit offset from the facet edge

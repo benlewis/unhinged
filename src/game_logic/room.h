@@ -44,7 +44,7 @@ private:
   
 public:
   Room();
-  void Clip(GLfloat &x, GLfloat &z);
+  void Clip(GLfloat &x, GLfloat &y, GLfloat &z);
   GLfloat get_width();
   GLfloat get_length();
   GLfloat get_height();

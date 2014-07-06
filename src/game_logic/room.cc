@@ -33,11 +33,11 @@ void Room::Draw() {
   GLfloat backDir[] = {0.0f, 0.0f, -1.0f, 1.0f};
 
   glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor);
-  glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
+  //glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor);
   glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
 
   glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor);
-  glLightfv(GL_LIGHT2, GL_SPECULAR, lightColor);
+  //glLightfv(GL_LIGHT2, GL_SPECULAR, lightColor);
   glLightfv(GL_LIGHT2, GL_POSITION, backPos);
   glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, backDir);
   
@@ -110,13 +110,17 @@ GLfloat Room::get_board_height() {
 	return board_height_;
 }
 
-void Room::Clip(GLfloat &x, GLfloat &z) {
-    if (x < left_wall_ + clipping_plane_)
-        x = left_wall_ + clipping_plane_;
-    if (x > right_wall_ - clipping_plane_)
-        x = right_wall_ - clipping_plane_;
-    if (z > front_wall_ - clipping_plane_)
-        z = front_wall_ - clipping_plane_;
-    if (z < back_wall_ + clipping_plane_)
-        z = back_wall_ + clipping_plane_;
+void Room::Clip(GLfloat &x, GLfloat &y, GLfloat &z) {
+  if (x < left_wall_ + clipping_plane_)
+    x = left_wall_ + clipping_plane_;
+  if (x > right_wall_ - clipping_plane_)
+    x = right_wall_ - clipping_plane_;
+  if (z > front_wall_ - clipping_plane_)
+    z = front_wall_ - clipping_plane_;
+  if (z < back_wall_ + clipping_plane_)
+    z = back_wall_ + clipping_plane_;
+  if (y < room_floor_ + clipping_plane_)
+    y = room_floor_ + clipping_plane_;
+  if (y > room_ceiling_ - clipping_plane_)
+    y = room_ceiling_ - clipping_plane_;
 }

@@ -39,6 +39,7 @@ GLfloat y_angle = -sin(0.0f);
 
 // Movement
 GLfloat speed = 0.05f;
+GLfloat head_speed = 0.05f;
 
 // Input
 unsigned char keys[127] = {0};
@@ -68,20 +69,25 @@ void ComputeAngle() {
 void ComputePosition() {
   GLfloat delta_move = 0.0f;
   if (keys['w'] == 1)
-      delta_move += 1.0;
+    delta_move += 1.0;
   if (keys['s'] == 1)
-      delta_move -= 1.0;
+    delta_move -= 1.0;
 
   GLfloat delta_side = 0.0f;
   if (keys['d']  == 1)
-      delta_side += 1.0;
+    delta_side += 1.0;
   if (keys['a'] == 1)
-      delta_side -= 1.0;
+    delta_side -= 1.0;
+  
+  if (keys['q'] == 1)
+    head_height += head_speed;
+  if (keys['e'] == 1)
+    head_height -= head_speed;
     
 	x += delta_move * x_angle * speed - delta_side * z_angle * speed;;
 	z += delta_move * z_angle * speed + delta_side * x_angle * speed;
     
-  room->Clip(x, z);
+  room->Clip(x, head_height, z);
 }
 
 void Reshape(int w, int h) {
