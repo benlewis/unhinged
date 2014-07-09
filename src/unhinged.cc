@@ -6,6 +6,18 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
+
+/*
+ TODOS:
+  - Remove concept of FaceDirection. Give each Face a rotation and location and a Plane
+  - Clip by Face, using old->new location line intersect with a cube based on the face + clipping plane
+  - Setup a room by adding 6 faces with textures
+  - Setup a box by adding 6 faces with materials
+  - AddGear to a Peg with a mouse click
+  - Create a Texture class to mirror Material
+  - Use gluOrtho2d (or something) to establish an area on the bottom of the screen for inventory
+*/
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,15 +34,11 @@ GLfloat half_width = 100.0f, half_height = 100.0f;
 
 // The following variables are used to track movement and direction
 
-// How high up is the head
-GLfloat head_height = 0.0f;
-
-
 // Vector representing the camera's direction
 GLfloat lx = 0.0f, lz = -1.0f, ly = 0.0f;
 
-// XZ position of the camera
-GLfloat x = 0.0f, z = 1.0f;
+// position of the camera / user
+glm::vec3 location = glm::vec3(0.0f, 0.0f, 1.0f);
 
 // What angle are we pointing
 GLfloat x_angle = sin(0.0f);
@@ -67,6 +75,8 @@ void ComputeAngle() {
 }
 
 void ComputePosition() {
+  glm::vec3 old_location = location;
+  
   GLfloat delta_move = 0.0f;
   if (keys['w'] == 1)
     delta_move += 1.0;
@@ -79,15 +89,19 @@ void ComputePosition() {
   if (keys['a'] == 1)
     delta_side -= 1.0;
   
+  GLfloat delta_y = 0.0f;
   if (keys['q'] == 1)
-    head_height += head_speed;
+    delta_y += head_speed;
   if (keys['e'] == 1)
-    head_height -= head_speed;
+    delta_y -= head_speed;
+  
+  if (delta_move != 0.0f || delta_side != 0.0f || delta_y != 0.0f) {
+    location.x += delta_move * x_angle * speed - delta_side * z_angle * speed;;
+    location.z += delta_move * z_angle * speed + delta_side * x_angle * speed;
+    location.y += delta_y;
     
-	x += delta_move * x_angle * speed - delta_side * z_angle * speed;;
-	z += delta_move * z_angle * speed + delta_side * x_angle * speed;
-    
-  room->Clip(x, head_height, z);
+    room->Clip(old_location, location);
+  }
 }
 
 void Reshape(int w, int h) {
@@ -131,13 +145,13 @@ void Display(void) {
   // Move and position if necessary
   ComputeAngle();
   ComputePosition();
-
+  
 	// Set the camera
 	//printf("x: %.2f, head_height: %.2f, z: %.2f, lx: %.2f, ly: %.2f, lz: %.2f\n", x, head_height, z, lx, ly, lz);
-
+  
 	gluLookAt(
-      x,      head_height,   z,
-      x+lx,   ly,   z+lz,
+      location.x,      location.y,   location.z,
+      location.x+lx,   location.y + ly,   location.z+lz,
       0.0f,   1.0f,   0.0f);
   
   DrawRoom();
@@ -201,10 +215,10 @@ void MouseMove(int x, int y) {
   mouse_y_location += (y - half_height) / half_height;
     
 
-	if (mouse_y_location < -0.3f)
-    mouse_y_location = -0.3f;
-  if (mouse_y_location > 0.6f)
-    mouse_y_location = 0.6f;
+	if (mouse_y_location < -1.2f)
+    mouse_y_location = -1.2f;
+  if (mouse_y_location > 1.2f)
+    mouse_y_location = 1.2f;
   if (mouse_x_location > 2.0f)
     mouse_x_location -= 4.0f;
   if (mouse_x_location < -2.0f)
@@ -214,7 +228,7 @@ void MouseMove(int x, int y) {
 }
  
 void Idle() {
-    Display();
+  Display();
 }
 
 int main(int argc, char **argv) {
@@ -255,7 +269,7 @@ int main(int argc, char **argv) {
   glutIgnoreKeyRepeat(1);
 
   // Handle mouse events
-  glutSetCursor(GLUT_CURSOR_NONE);
+  glutSetCursor(GLUT_CURSOR_FULL_CROSSHAIR);
   glutPassiveMotionFunc(MouseMove);
   glutMouseFunc(MouseFunc);
 

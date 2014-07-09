@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 ben. All rights reserved.
 //
 
+#include "game_logic/room.h"
 #include "game_logic/facet.h"
-#include "game_logic/box_face.h"
+#include "game_logic/face.h"
 #include "game_logic/gear.h"
 
 #include "render/material.h"
@@ -16,8 +17,13 @@ bool Facet::AddGear(Gear* gear) {
   if (HasGear()) {
     return false;
   } else {
-    this->gear_ = gear;
-    return true;
+    if (room_->AddGear(gear)) {
+      this->gear_ = gear;
+      return true;
+    } else {
+      return false;
+    }
+    
   }
 }
 
@@ -29,12 +35,16 @@ bool Facet::HasGear() {
   return (gear_ != nullptr);
 }
 
+Plane Facet::get_plane() {
+  return face_->get_plane();
+}
+
 void Facet::Draw() {
   if (HasPeg()) {
     glPushMatrix();
     peg_material_->EnableMaterial();
-    GLfloat dw = box_face_->get_facet_width();
-    GLfloat dh = box_face_->get_facet_height();
+    GLfloat dw = room_->get_facet_size();
+    GLfloat dh = dw;
     
     GLfloat radius = dw / 5.0f;
     

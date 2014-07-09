@@ -23,37 +23,37 @@
 
 using namespace std;
 
-class Piece;
-class Box;
+class Face;
+class Gear;
 
 class Room {
 private:
-  GLfloat left_wall_, right_wall_;
-  GLfloat room_ceiling_, room_floor_;
-  GLfloat front_wall_, back_wall_;
+  // TODO: Put these into a configuration file
   
+  // Don't go right up against walls or blocks
   GLfloat clipping_plane_ = 0.15f;
-	GLfloat board_width_ = 20.0f;
-	GLfloat board_length_ = 20.0f;
-	GLfloat board_height_ = 10.0f;
-
-	vector<Piece*> pieces_;
-  Box *box_;
   
-  void DrawFace(vector<float> x, vector<float> y, vector<float> z);
+  // The room dimensions. Assume middle at 0.0f
+	GLfloat width_    = 4.0f;
+	GLfloat length_   = 4.0f;
+	GLfloat height_   = 2.0f;
+  
+  // How big is a facet
+  GLfloat facet_size_     = 0.25f;
+
+  vector<Face*> faces_; // All the faces we will draw
+  vector<Gear*> gears_; // All our gears, for tracking spins
+  
+  void CreateRoomWalls();
+  void CreateBox(glm::vec3 box_center, GLint w, GLint h, GLint l);
   
 public:
   Room();
-  void Clip(GLfloat &x, GLfloat &y, GLfloat &z);
-  GLfloat get_width();
-  GLfloat get_length();
-  GLfloat get_height();
-	GLfloat get_board_width();
-	GLfloat get_board_length();
-	GLfloat get_board_height();
-
+  void Clip(glm::vec3 old_location, glm::vec3 &new_location);
   void Draw();
-
+  bool AddGear(Gear *gear);
+  GLfloat get_clipping_plane() { return clipping_plane_; }
+  GLfloat get_facet_size() { return facet_size_; }
 };
 
 #endif /* defined(__osx_unhinged__room__) */

@@ -24,4 +24,7 @@
 #endif
 
 
+#include "third_party/glm/glm.hpp"
+#include "render/render_math.h"
+
 #endif

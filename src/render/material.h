@@ -12,6 +12,8 @@
 #include "render/gl_headers.h"
 
 class Material {
+  friend class MaterialManager;
+
 private:
   GLfloat ambient_[4];
   GLfloat diffuse_[4];
@@ -20,10 +22,11 @@ private:
   
   static float gold[];
 
-public:
-  Material(GLfloat a, GLfloat b, GLfloat c, GLfloat d, GLfloat e, GLfloat f, 
+  Material(GLfloat a, GLfloat b, GLfloat c, GLfloat d, GLfloat e, GLfloat f,
            GLfloat g, GLfloat h, GLfloat i, GLfloat j, GLfloat k, GLfloat l,
            GLfloat m);
+
+public:
 
   void EnableMaterial();
 
