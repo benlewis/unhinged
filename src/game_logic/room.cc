@@ -18,6 +18,7 @@ Room::Room() {
 
   CreateRoomWalls();
   CreateBox(glm::vec3(0.0f, 0.0f, -0.75f), 5, 2, 2);
+  CreateBox(glm::vec3(1.0f, 0.0f, -0.75f), 1, 2, 2);
 }
 
 void Room::CreateBox(glm::vec3 box_center, GLint w, GLint h, GLint l) {

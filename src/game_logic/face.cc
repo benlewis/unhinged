@@ -84,30 +84,33 @@ Plane Face::get_plane() {
 
 void Face::Clip(glm::vec3 old_location, glm::vec3 &new_location) {
   switch (plane_) {
-//    case PLANE_XY:
-//      if (rotation_.w == 0.0f) {
-//        printf("Checking clip of %.2f,%.2f,%.2f to %.2f,%.2f,%.2f\n", old_location.x, old_location.y, old_location.z, new_location.x, new_location.y, new_location.z);
-//        printf("Checking clip of %.2f,%.2f,%.2f to %.2f,%.2f,%.2f\n", location_.x, location_.y, location_.z, new_location.x, new_location.y, new_location.z);
-//        if (old_location.x > location_.x && old_location.x < location_.x + draw_width() &&
-//            new_location.x > location_.x && new_location.x < location_.x + draw_width() &&
-//            old_location.y > location_.y && old_location.y < location_.y + draw_height() &&
-//            new_location.y > location_.y && new_location.y < location_.y + draw_height() &&
-//            old_location.z > location_.z + room_->get_clipping_plane() &&
-//            new_location.z <= location_.z + room_->get_clipping_plane()) {
-//          new_location.z = location_.z + room_->get_clipping_plane();
-//        }
-//      } else {
-//        if (new_location.x < location_.x && new_location.x > location_.x - draw_width() &&
-//            new_location.y > location_.y && new_location.y < location_.y + draw_height() &&
-//            new_location.z > location_.z - room_->get_clipping_plane()) {
-//          //new_location.z = location_.z - room_->get_clipping_plane();
-//        }
-//      }
-//      break;
-//    case PLANE_XZ:
-//      break;
-//    case PLANE_YZ:
-//      break;
+    case PLANE_XY:
+      if (rotation_.w == 0.0f) {
+        if (old_location.x > location_.x && old_location.x < location_.x + draw_width() &&
+            new_location.x > location_.x && new_location.x < location_.x + draw_width() &&
+            old_location.y > location_.y && old_location.y < location_.y + draw_height() &&
+            new_location.y > location_.y && new_location.y < location_.y + draw_height() &&
+            old_location.z > location_.z - room_->get_clipping_plane() &&
+            new_location.z <= location_.z + room_->get_clipping_plane()) {
+          new_location.z = location_.z + room_->get_clipping_plane();
+        }
+      } else {
+        printf("Checking clip of %.2f,%.2f,%.2f to %.2f,%.2f,%.2f\n", old_location.x, old_location.y, old_location.z, new_location.x, new_location.y, new_location.z);
+        printf("Checking clip of %.2f,%.2f,%.2f to %.2f,%.2f,%.2f\n", location_.x, location_.y, location_.z, new_location.x, new_location.y, new_location.z);
+        if (old_location.x < location_.x && old_location.x > location_.x - draw_width() &&
+            new_location.x < location_.x && new_location.x > location_.x - draw_width() &&
+            old_location.y > location_.y && old_location.y < location_.y + draw_height() &&
+            new_location.y > location_.y && new_location.y < location_.y + draw_height() &&
+            old_location.z < location_.z + room_->get_clipping_plane() &&
+            new_location.z >= location_.z - room_->get_clipping_plane()) {
+          new_location.z = location_.z - room_->get_clipping_plane();
+        }
+      }
+      break;
+    case PLANE_XZ:
+      break;
+    case PLANE_YZ:
+      break;
   }
   
   //  glm::vec3 B1, B2;

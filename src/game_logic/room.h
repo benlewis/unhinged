@@ -33,13 +33,14 @@ private:
   // Don't go right up against walls or blocks
   GLfloat clipping_plane_ = 0.15f;
   
+  // How big is a facet
+  GLfloat facet_size_     = 0.25f;
+  
   // The room dimensions. Assume middle at 0.0f
 	GLfloat width_    = 4.0f;
 	GLfloat length_   = 4.0f;
 	GLfloat height_   = 2.0f;
   
-  // How big is a facet
-  GLfloat facet_size_     = 0.25f;
 
   vector<Face*> faces_; // All the faces we will draw
   vector<Gear*> gears_; // All our gears, for tracking spins
