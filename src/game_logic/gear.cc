@@ -14,8 +14,8 @@
 
 #include "math.h"
 
-Gear::Gear(Rotation base_rotation, Material *material):
-base_rotation_(base_rotation), material_(material)  {
+Gear::Gear(Rotation base_rotation, Material *material, Facet *facet):
+base_rotation_(base_rotation), rotation_(base_rotation), material_(material), facet_(facet)  {
   CreateList();
 }
 

@@ -16,7 +16,7 @@
 
 Room::Room() {
 
-  //CreateRoomWalls();
+  CreateRoomWalls();
   CreateBox(glm::vec3(0.0f, 0.0f, -0.75f), 5, 2, 2);
   //CreateBox(glm::vec3(1.0f, 0.0f, -0.75f), 1, 2, 2);
 }
@@ -58,32 +58,32 @@ void Room::CreateBox(glm::vec3 box_center, GLint w, GLint h, GLint l) {
 }
 
 void Room::CreateRoomWalls() {
-  glm::vec3 location = glm::vec3(width_ / -2.0f, height_ / -2.0f, length_ / -2.0f);
+  glm::vec3 location = glm::vec3(0.0f, 0.0f, length_ / -2.0f);
   glm::vec4 rotation = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f); // no rotation for our back wall
   Face *back_wall = new Face(this, nullptr, "darkwood.jpg", width_ / facet_size_, height_ / facet_size_, location, rotation, PLANE_XY, false);
   faces_.push_back(back_wall);
   
-  location = glm::vec3(width_ / 2.0f, height_ / -2.0f, length_ / 2.0f);
+  location.z = length_ / 2.0f;
   rotation = glm::vec4(0.0f, 1.0f, 0.0f, 180.0f);
   Face *front_wall = new Face(this, nullptr, "darkwood.jpg", width_ / facet_size_, height_ / facet_size_, location, rotation, PLANE_XY, false);
   faces_.push_back(front_wall);
 
-  location = glm::vec3(width_ / -2.0f, height_ / -2.0f, length_ / 2.0f);
+  location = glm::vec3(0.0f, height_ / -2.0f, 0.0f);
   rotation = glm::vec4(1.0f, 0.0f, 0.0f, -90.0f);
   Face *floor = new Face(this, nullptr, "darkwood.jpg", width_ / facet_size_, length_ / facet_size_, location, rotation, PLANE_XZ, false);
   faces_.push_back(floor);
 
-  location = glm::vec3(width_ / -2.0f, height_ / 2.0f, length_ / -2.0f);
+  location.y = height_ / 2.0f;
   rotation = glm::vec4(1.0f, 0.0f, 0.0f, 90.0f);
   Face *ceiling = new Face(this, nullptr, "darkwood.jpg", width_ / facet_size_, length_ / facet_size_, location, rotation, PLANE_XZ, false);
   faces_.push_back(ceiling);
   
-  location = glm::vec3(width_ / -2.0f, height_ / -2.0f, length_ / 2.0f);
+  location = glm::vec3(width_ / -2.0f, 0.0f, 0.0f);
   rotation = glm::vec4(0.0f, 1.0f, 0.0f, 90.0f);
   Face *left_wall = new Face(this, nullptr, "darkwood.jpg", width_ / facet_size_, height_ / facet_size_, location, rotation, PLANE_YZ, false);
   faces_.push_back(left_wall);
   
-  location = glm::vec3(width_ / 2.0f, height_ / -2.0f, length_ / -2.0f);
+  location.x = width_ / 2.0f;
   rotation = glm::vec4(0.0f, 1.0f, 0.0f, -90.0f);
   Face *right_wall = new Face(this, nullptr, "darkwood.jpg", width_ / facet_size_, height_ / facet_size_, location, rotation, PLANE_YZ, false);
   faces_.push_back(right_wall);
@@ -116,7 +116,10 @@ void Room::Draw() {
 }
 
 bool Room::AddGear(Gear *gear) {
+  gears_.push_back(gear); // Add this gear to our list
+
   // Set all next rotations to their base state
+  
   for (vector<Gear*>::iterator i = gears_.begin(); i != gears_.end(); i++) {
     Gear *g = *i;
     g->ClearNextRotation();
@@ -146,6 +149,7 @@ bool Room::AddGear(Gear *gear) {
         }
         if (!g->SetNextRotation(spinning_gear->OppositeRotation())) {
           // This means that the rotation is in two directions - not allowed
+          gears_.pop_back();
           return false;
         }
         

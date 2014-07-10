@@ -81,73 +81,49 @@ Plane Face::get_plane() {
 }
 
 void Face::Clip(glm::vec3 old_location, glm::vec3 &new_location) {
+
+  glm::vec3 B1, B2, hit;
+  GLfloat head_width = 0.15f;
+  GLfloat head_height = 0.15f;
+  
   switch (plane_) {
     case PLANE_XY:
-      if (new_location.x > location_.x - draw_width() / 2.0f && new_location.x < location_.x + draw_width() / 2.0f &&
-          new_location.y > location_.y - draw_height() / 2.0f && new_location.y < location_.y + draw_height() / 2.0f) {
-        if (old_location.z > location_.z &&
-           new_location.z <= location_.z + room_->get_clipping_plane()) {
-          new_location.z = location_.z + room_->get_clipping_plane();
-        }
-        else if (old_location.z < location_.z &&
-                 new_location.z >= location_.z - room_->get_clipping_plane()) {
-          new_location.z = location_.z - room_->get_clipping_plane();
-        }
+      B1 = glm::vec3(location_.x - head_width - draw_width() / 1.98f,
+                     location_.y - head_height - draw_height() / 1.98f,
+                     location_.z - room_->get_clipping_plane());
+      B2 = glm::vec3(B1.x + head_width + draw_width() * 1.04f,
+                     B1.y + head_height + draw_height() * 1.04f,
+                     B1.z + 2.0f * room_->get_clipping_plane());
+      if (CheckLineBox(B1, B2, old_location, new_location, hit)) {
+        new_location.z = old_location.z;
       }
       break;
     case PLANE_XZ:
-      break;
-      
-    case PLANE_YZ:
-      if (new_location.y > location_.y - draw_height() / 2.0f && new_location.y < location_.y + draw_height() / 2.0f) {
-        if (old_location.x > location_.x + draw_width() / 2.0f &&
-           new_location.x <= location_.x + draw_width() / 2.0f + room_->get_clipping_plane()) {
-          new_location.x = location_.x + draw_width() / 2.0f + room_->get_clipping_plane();
-        } else if (old_location.x < location_.x - draw_width() / 2.0f &&
-                  new_location.x >= location_.x - draw_width() / 2.0f - room_->get_clipping_plane()) {
-          new_location.x = location_.x - draw_width() / 2.0f - room_->get_clipping_plane();
-        }
+      B1 = glm::vec3(location_.x - head_width - draw_width() / 1.98f,
+                     location_.y - room_->get_clipping_plane(),
+                     location_.z - head_height - draw_height() / 1.98);
+      B2 = glm::vec3(B1.x + head_width + draw_width() * 1.04f,
+                     B1.y + 2.0f * room_->get_clipping_plane(),
+                     B1.z + head_height + draw_height() * 1.04f);
+      if (CheckLineBox(B1, B2, old_location, new_location, hit)) {
+        new_location.y = old_location.y;
       }
       break;
+    case PLANE_YZ:
+      B1 = glm::vec3(location_.x - room_->get_clipping_plane(),
+                     location_.y - head_height - draw_height() / 1.98f,
+                     location_.z - head_width - draw_width() / 1.98f);
+      B2 = glm::vec3(B1.x + 2.0f * room_->get_clipping_plane(),
+                     B1.y + head_height + draw_height() * 1.04f,
+                     B1.z + head_width + draw_width() * 1.04f);
+      if (CheckLineBox(B1, B2, old_location, new_location, hit)) {
+        new_location.x = old_location.x;
+      }
+
+    break;
   }
-  
-  //  glm::vec3 B1, B2;
-  //  switch (plane_) {
-  //    case PLANE_XY:
-  //      B1 = glm::vec3(location_.x,
-  //                     location_.y,
-  //                     location_.z + room_->get_clipping_plane());
-  //      B2 = glm::vec3(location_.x + room_->get_facet_size() * facets_columns_,
-  //                     location_.y + room_->get_facet_size() * facets_rows_,
-  //                     location_.z - room_->get_clipping_plane());
-  //      if (texture_name_ != "") {
-  //      printf("Checking clip of %.2f,%.2f,%.2f to %.2f,%.2f,%.2f %.2f,%.2f,%.2f to %.2f,%.2f,%.2f\n", B1.x, B1.y, B1.z, B2.x, B2.y, B2.z, old_location.x, old_location.y, old_location.z, new_location.x, new_location.y, new_location.z);
-  //      }
-  //      break;
-  //    case PLANE_XZ:
-  //      B1 = glm::vec3(location_.x - room_->get_facet_size() * facets_columns_ / 2.0f,
-  //                     location_.z - room_->get_facet_size() * facets_rows_ / 2.0f,
-  //                     location_.y + room_->get_clipping_plane());
-  //      B2 = glm::vec3(location_.x + room_->get_facet_size() * facets_columns_ / 2.0f,
-  //                     location_.z + room_->get_facet_size() * facets_rows_ / 2.0f,
-  //                     location_.y - room_->get_clipping_plane());
-  //      break;
-  //    case PLANE_YZ:
-  //      B1 = glm::vec3(location_.z - room_->get_facet_size() * facets_columns_ / 2.0f,
-  //                     location_.y - room_->get_facet_size() * facets_rows_ / 2.0f,
-  //                     location_.x + room_->get_clipping_plane());
-  //      B2 = glm::vec3(location_.z + room_->get_facet_size() * facets_columns_ / 2.0f,
-  //                     location_.y + room_->get_facet_size() * facets_rows_ / 2.0f,
-  //                     location_.x - room_->get_clipping_plane());
-  //    break;
-  //  }
-  //
-  //
-  //
-  //  if (CheckLineBox(B1, B2, old_location, new_location, new_location)) {
-  //    printf("Clipped!\n");
-  //    new_location = old_location;
-  //  }
+
+
 }
 
 void Face::SetupFacets(bool facets) {
@@ -177,6 +153,15 @@ void Face::SetupFacets(bool facets) {
           break;
       }
       facets_[i][j] = new Facet(facets, this, room_, peg_mat, facet_center);
+      if (plane_ == PLANE_XY) {
+        if (i == 0 && j == 0) {
+          facets_[i][j]->AddGear(new Gear(SPIN_CLOCKWISE, MaterialManager::Instance()->get_material("bronze"),
+                                          facets_[i][j]));
+        } else {
+//          facets_[i][j]->AddGear(new Gear(SPIN_NONE, MaterialManager::Instance()->get_material("bronze"),
+//                                          facets_[i][j]));
+        }
+      }
     }
   }
 }

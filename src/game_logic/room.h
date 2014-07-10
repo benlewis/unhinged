@@ -34,7 +34,7 @@ private:
   GLfloat clipping_plane_ = 0.15f;
   
   // How big is a facet
-  GLfloat facet_size_     = 0.25f;
+  GLfloat facet_size_     = 0.20f;
   
   // The room dimensions. Assume middle at 0.0f
 	GLfloat width_    = 4.0f;

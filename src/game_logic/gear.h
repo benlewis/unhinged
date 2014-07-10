@@ -22,7 +22,7 @@ enum Rotation {
 
 class Gear {
 public:
-	Gear(Rotation rotation, Material *material);
+	Gear(Rotation rotation, Material *material, Facet *facet);
 
   void Update(int ticks);
 	void Draw();
