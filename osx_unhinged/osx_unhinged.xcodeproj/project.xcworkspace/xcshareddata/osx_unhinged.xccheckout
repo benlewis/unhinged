@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>42C3E749-0545-4548-8846-B467847803F6</string>
+	<string>DFF56A7C-BB5B-4AD9-B369-2E2FEB510AD9</string>
 	<key>IDESourceControlProjectName</key>
 	<string>osx_unhinged</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B33742E3-A098-4337-842C-574A16200ACF</key>
-		<string>ssh://github.com/benlewis/unhinged.git</string>
+		<key>F8BECFB4-79EF-4FAD-BEDD-473F3300BE79</key>
+		<string>https://github.com/benlewis/unhinged/</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>osx_unhinged/osx_unhinged.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B33742E3-A098-4337-842C-574A16200ACF</key>
+		<key>F8BECFB4-79EF-4FAD-BEDD-473F3300BE79</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/benlewis/unhinged.git</string>
+	<string>https://github.com/benlewis/unhinged/</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B33742E3-A098-4337-842C-574A16200ACF</string>
+	<string>F8BECFB4-79EF-4FAD-BEDD-473F3300BE79</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B33742E3-A098-4337-842C-574A16200ACF</string>
+			<string>F8BECFB4-79EF-4FAD-BEDD-473F3300BE79</string>
 			<key>IDESourceControlWCCName</key>
 			<string>unhinged</string>
 		</dict>

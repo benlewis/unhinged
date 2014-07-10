@@ -16,52 +16,43 @@
 
 Room::Room() {
 
-  CreateRoomWalls();
+  //CreateRoomWalls();
   CreateBox(glm::vec3(0.0f, 0.0f, -0.75f), 5, 2, 2);
-  CreateBox(glm::vec3(1.0f, 0.0f, -0.75f), 1, 2, 2);
+  //CreateBox(glm::vec3(1.0f, 0.0f, -0.75f), 1, 2, 2);
 }
 
 void Room::CreateBox(glm::vec3 box_center, GLint w, GLint h, GLint l) {
   Material *material = MaterialManager::Instance()->get_material("cyan_plastic");
-  glm::vec3 location = glm::vec3(box_center.x - w * facet_size_ / 2.0f,
-                                 box_center.y - h * facet_size_ / 2.0f,
-                                 box_center.z + l * facet_size_ / 2.0f);
+    glm::vec3 location = box_center;
+    location.z += l * facet_size_ / 2.0f;
   glm::vec4 rotation = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
   Face *front = new Face(this, material, "", w, h, location, rotation, PLANE_XY, true);
   faces_.push_back(front);
 
-  location = glm::vec3(box_center.x + w * facet_size_ / 2.0f,
-                                 box_center.y - h * facet_size_ / 2.0f,
-                                 box_center.z - l * facet_size_ / 2.0f);
+    location.z -= l * facet_size_;
   rotation = glm::vec4(0.0f, 1.0f, 0.0f, 180.0f);
   Face *back = new Face(this, material, "", w, h, location, rotation, PLANE_XY, true);
   faces_.push_back(back);
   
-  location = glm::vec3(box_center.x - w * facet_size_ / 2.0f,
-                       box_center.y - h * facet_size_ / 2.0f,
-                       box_center.z - l * facet_size_ / 2.0f);
-  rotation = glm::vec4(0.0f, 1.0f, 0.0f, -90.0f);
+    location = box_center;
+    location.x -= w * facet_size_ / 2.0f;
+    rotation = glm::vec4(0.0f, 1.0f, 0.0f, -90.0f);
   Face *left = new Face(this, material, "", l, h, location, rotation, PLANE_YZ, true);
   faces_.push_back(left);
-  
-  location = glm::vec3(box_center.x + w * facet_size_ / 2.0f,
-                       box_center.y - h * facet_size_ / 2.0f,
-                       box_center.z + l * facet_size_ / 2.0f);
-  rotation = glm::vec4(0.0f, 1.0f, 0.0f, 90.0f);
+    
+    location.x += w * facet_size_;
+    rotation = glm::vec4(0.0f, 1.0f, 0.0f, 90.0f);
   Face *right = new Face(this, material, "", l, h, location, rotation, PLANE_YZ, true);
   faces_.push_back(right);
-  
-  location = glm::vec3(box_center.x - w * facet_size_ / 2.0f,
-                       box_center.y + h * facet_size_ / 2.0f,
-                       box_center.z + l * facet_size_ / 2.0f);
-  rotation = glm::vec4(1.0f, 0.0f, 0.0f, -90.0f);
+    
+    location = box_center;
+    location.y += h * facet_size_ / 2.0f;
+    rotation = glm::vec4(1.0f, 0.0f, 0.0f, -90.0f);
   Face *top = new Face(this, material, "", w, l, location, rotation, PLANE_XZ, true);
   faces_.push_back(top);
-
-  location = glm::vec3(box_center.x - w * facet_size_ / 2.0f,
-                       box_center.y - h * facet_size_ / 2.0f,
-                       box_center.z - l * facet_size_ / 2.0f);
-  rotation = glm::vec4(1.0f, 0.0f, 0.0f, +90.0f);
+    
+    location.y -= h * facet_size_;
+    rotation = glm::vec4(1.0f, 0.0f, 0.0f, +90.0f);
   Face *bottom = new Face(this, material, "", w, l, location, rotation, PLANE_XZ, true);
   faces_.push_back(bottom);
 }
