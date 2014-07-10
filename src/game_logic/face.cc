@@ -153,13 +153,13 @@ void Face::SetupFacets(bool facets) {
           break;
       }
       facets_[i][j] = new Facet(facets, this, room_, peg_mat, facet_center);
-      if (plane_ == PLANE_XY) {
+      if (facets && plane_ == PLANE_XY) {
         if (i == 0 && j == 0) {
           facets_[i][j]->AddGear(new Gear(SPIN_CLOCKWISE, MaterialManager::Instance()->get_material("bronze"),
                                           facets_[i][j]));
         } else {
-//          facets_[i][j]->AddGear(new Gear(SPIN_NONE, MaterialManager::Instance()->get_material("bronze"),
-//                                          facets_[i][j]));
+          facets_[i][j]->AddGear(new Gear(SPIN_NONE, MaterialManager::Instance()->get_material("bronze"),
+                                          facets_[i][j]));
         }
       }
     }
